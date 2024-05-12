@@ -1,0 +1,53 @@
+{
+    "name": "@userfront/node",
+    "version": "0.0.0",
+    "description": "TypeScript library for Userfront Node.js SDK",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/userfront/userfront.git"
+    },
+    "private": false,
+    "scripts": {
+      "build": "tsup",
+      "dev": "tsup --watch",
+      "lint": "eslint .",
+      "lint:fix": "pnpm lint --fix",
+      "test:watch": "vitest watch",
+      "test": "vitest run",
+      "type-check": "tsc --noEmit"
+    },
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        },
+        "./*": {
+            "import": "./dist/*.js",
+            "require": "./dist/*.cjs"
+        }
+    },
+    "typesVersions": {
+        "*": {
+            "*": [
+                "src/*.ts"
+            ]
+        }
+    },
+    "dependencies": {
+
+    },
+    "devDependencies": {
+        "@types/react": "18.3.1",
+        "@types/react-dom": "18.3.0",
+        "tsup": "8.0.2",
+        "type-fest": "4.18.2",
+        "typescript": "5.4.5",
+        "vitest": "1.6.0"
+    },
+    "peerDependencies": {
+        "eslint": "9.2.0"
+    },
+    "engines": {
+      "node": ">=20"
+    }
+}
