@@ -1,0 +1,53 @@
+{
+  "name": "@userfront/userfront",
+  "version": "0.0.0",
+  "description": "TypeScript monorepo for Userfront NPM packages",
+  "private": true,
+  "scripts": {
+    "build:next": "pnpm --filter ./packages/next build",
+    "build:node": "pnpm --filter ./packages/node build",
+    "build:react": "pnpm --filter ./packages/react build",
+    "build": "pnpm m run build",
+    "clean": "pnpm store prune && rm -rf node_modules",
+    "dev:next": "pnpm --filter ./packages/next dev",
+    "dev:node": "pnpm --filter ./packages/node dev",
+    "dev:react": "pnpm --filter ./packages/react dev",
+    "dev": "pnpm /^dev:.*/",
+    "lint:next": "pnpm --filter ./packages/next lint",
+    "lint:node": "pnpm --filter ./packages/node lint",
+    "lint:react": "pnpm --filter ./packages/react lint",
+    "lint": "pnpm m run lint",
+    "pre-commit": "pnpm lint",
+    "pre-push": "pnpm test && pnpm type-check",
+    "test:next": "pnpm --filter ./packages/next test",
+    "test:node": "pnpm --filter ./packages/node test",
+    "test:react": "pnpm --filter ./packages/react test",
+    "test": "pnpm m run test",
+    "type-check:next": "cd packages/next && pnpm type-check",
+    "type-check:node": "cd packages/node && pnpm type-check",
+    "type-check:react": "cd packages/react && pnpm type-check",
+    "type-check": "pnpm m run type-check"
+  },
+  "devDependencies": {
+    "@swc/core": "1.5.5",
+    "@types/node": "20.12.11",
+    "commitizen": "4.3.0",
+    "eslint": "9.2.0",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.2",
+    "prettier": "3.2.5",
+    "tsup": "8.0.2",
+    "typescript": "5.4.5",
+    "vitest": "1.6.0"
+  },
+  "workspaces": [
+    "examples/*",
+    "packages/*",
+    "internals/*",
+    "!**/test/**"
+  ],
+  "engines": {
+    "node": ">=21",
+    "pnpm": ">=9"
+  }
+}
