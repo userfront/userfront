@@ -3,39 +3,31 @@
     "version": "0.0.0",
     "description": "Transform your React application with Userfront authentication",
     "repository": {
-      "type": "git",
-      "url": "https://github.com/userfront/userfront.git"
+        "type": "git",
+        "url": "https://github.com/userfront/userfront.git"
     },
-    "private": false,
     "scripts": {
-      "build": "tsup",
-      "dev": "tsup --watch",
-      "lint": "eslint .",
-      "lint:fix": "pnpm lint --fix",
-      "test:watch": "vitest watch",
-      "test": "vitest run",
-      "type-check": "tsc --noEmit"
+        "build": "tsup --cjsInterop",
+        "dev": "tsup --watch",
+        "lint": "eslint .",
+        "lint:fix": "pnpm lint --fix",
+        "test:watch": "vitest watch",
+        "test": "vitest run",
+        "type-check": "tsc --noEmit"
     },
-    "exports": {
-        ".": {
-            "import": "./dist/index.js",
-            "require": "./dist/index.cjs"
-        },
-        "./*": {
-            "import": "./dist/*.js",
-            "require": "./dist/*.cjs"
-        }
-    },
-    "typesVersions": {
-        "*": {
-            "*": [
-                "src/*.ts"
-            ]
-        }
-    },
+    "files": [
+        "dist"
+    ],
+    "exports": "./dist/index.js",
     "devDependencies": {
         "@types/react": "18.3.1",
         "@types/react-dom": "18.3.0",
+        "@userfront/core": "0.6.8",
+        "@userfront/toolkit": "1.0.9",
+        "@vitejs/plugin-react": "4.2.1",
+        "axios": "1.6.8",
+        "happy-dom": "14.11.0",
+        "react-use": "17.5.0",
         "tsup": "8.0.2",
         "type-fest": "4.18.2",
         "typescript": "5.4.5",
@@ -46,7 +38,7 @@
         "react": "18.3.1",
         "react-dom": "18.3.1"
     },
-    "engines": {
-      "node": ">=20"
-    }
+  "engines": {
+    "node": ">=20"
+  }
 }
