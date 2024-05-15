@@ -1,9 +1,9 @@
 packages:
-    # executable applications
-    - "examples/*"
-    # distributed packages that are not executable
+    # example applications
+    - "apps/*"
+    # distributable packages
     - "packages/*"
-    # non-distributable packages, usually development dependencies
+    # non-distributable packages, development dependencies
     - 'internals/*'
     # exclude packages that are inside test directories
     - "!**/test/**"
