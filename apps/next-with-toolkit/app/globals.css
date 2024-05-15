@@ -5,14 +5,14 @@
 /**
   * Make the toolkit friendly to different UIs
  */
-.userfront-toolkit {
+.userfront-toolkit:not(.userfront-button-logout) {
   background: transparent!important;
   box-shadow: none!important;
   border: none!important;
 }
 .userfront-placeholder {display: none}
 .userfront-secured {display: none}
-.userfront-toolkit label {
+.userfront-toolkit:not(.userfront-button-logout) label {
   color: var(--userfront-text-color);
 }
 
