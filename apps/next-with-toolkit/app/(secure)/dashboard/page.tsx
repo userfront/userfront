@@ -10,23 +10,13 @@ import Link from "next/link";
 
 export default function DashboardPage() {
   const router = useRouter();
-  const {
-    user,
-    //logout
-  } = useUserfront();
+  const { user } = useUserfront();
 
   return (
     <div className="flex flex-col p-4 space-y-4">
       <span>Hello, {user.email}</span>
       <LogoutButton />
       <Link href="/server">Server Example with Data Fetching &#8594;</Link>
-      {/*
-        Custom Logout Button
-        ---
-        <button onClick={() => logout({ redirect: "/login" })}>
-          Logout
-        </button>
-       */}
     </div>
   );
 }

@@ -9,6 +9,7 @@ import {
   type PasswordResetFormProps,
   LogoutButton,
   type LogoutButtonProps,
+  type ToolkitProps,
 } from "./toolkit";
 import { useUserfront } from "./useUserfront";
 
@@ -56,4 +57,5 @@ export {
   UserfrontProvider,
   type UserfrontProviderProps,
   type UserfrontContextType,
+  type ToolkitProps,
 };

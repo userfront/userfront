@@ -11,10 +11,50 @@ interface UserfrontOptions {
    * Tenant ID from Userfront (**required**)
    */
   tenantId: string;
+  /**
+   * Loading skeleton component
+   */
+  skeleton?: React.ReactNode | null;
+  /**
+   * Where to redirect users that need to login
+   * @default "/login"
+   */
+  loginUrl?: string;
+  /**
+   * Redirect URL after login, set to `false` to disable.
+   * When `undefined`, use the path configured to the workspace
+   * [paths & routing settings](https://userfront.com/dashboard/paths)
+   */
+  loginRedirect?: string | boolean;
+  /**
+   * Redirect URL after signup, set to `false` to disable.
+   * When `undefined`, use the path configured to the workspace
+   * [paths & routing settings](https://userfront.com/dashboard/paths)
+   */
+  signupRedirect?: string | boolean;
+  /**
+   * Redirect URL after logout, set to `false` to disable.
+   * When `undefined`, use the path configured to the workspace
+   * [paths & routing settings](https://userfront.com/dashboard/paths)
+   */
+  logoutRedirect?: string | boolean;
+  /**
+   * Require authentication - unauthorized will redirect to `loginUrl` and authorized users will be redirected to `loginRedirect`
+   * @default true
+   */
+  requireAuth?: boolean;
 }
 
 // Internal hook
-export function useUserfront({ tenantId }: UserfrontOptions) {
+export function useUserfront({
+  tenantId,
+  skeleton = null,
+  loginUrl = "/login",
+  loginRedirect,
+  signupRedirect,
+  logoutRedirect,
+  requireAuth = true,
+}: UserfrontOptions) {
   const [userfront, setUserfront] =
     React.useState<UserfrontInstance>(Userfront);
   const [isLoading, setLoading] = useToggle(true);
@@ -36,12 +76,23 @@ export function useUserfront({ tenantId }: UserfrontOptions) {
 
   // Update the authenticated state
   useIsomorphicLayoutEffect(() => {
-    if (!userfront) return;
+    if (!userfront.user) return;
 
     if (userfront.user.email) {
       setAuthenticated(true);
     }
-  }, [userfront]);
+  }, [userfront.user]);
 
-  return { ...userfront, isAuthenticated, isLoading };
+  return {
+    tenantId,
+    isAuthenticated,
+    isLoading,
+    skeleton,
+    loginUrl,
+    loginRedirect,
+    signupRedirect,
+    logoutRedirect,
+    requireAuth,
+    ...userfront,
+  };
 }
