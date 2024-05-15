@@ -1,15 +1,15 @@
-import { defineConfig, type Options } from "tsup";
+import { defineConfig } from "tsup";
 
-export default defineConfig((options: Options) => ({
-  clean: process.env.NODE_ENV === "production",
-  dts: false, // for DX performance
-  entry: ["src"],
-  format: ["esm", "cjs"],
+export default defineConfig({
+  clean: true, // process.env.NODE_ENV === "production",
+  dts: true,
+  shims: true,
+  entry: ["src/index.tsx"],
+  // external: ["react"],
+  // noExternal: ["js-cookie", "@userfront/core", "@userfront/toolkit"],
+  format: ["cjs"],
   minify: process.env.NODE_ENV === "production",
-  platform: "neutral",
+  platform: "browser",
   replaceNodeEnv: true,
-  sourcemap: process.env.NODE_ENV === "development",
-  splitting: true,
-  target: "es5",
-  ...options,
-}));
+  sourcemap: process.env.NODE_ENV === "development" ? "inline" : false,
+});

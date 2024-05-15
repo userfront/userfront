@@ -7,11 +7,11 @@
     "build:next": "pnpm --filter ./packages/next build",
     "build:node": "pnpm --filter ./packages/node build",
     "build:react": "pnpm --filter ./packages/react build",
-    "build": "pnpm m run build",
+    "build": "pnpm run build:node && pnpm run build:react && pnpm run build:next",
     "clean": "pnpm store prune && rm -rf node_modules",
-    "dev:next": "pnpm --filter ./packages/next dev",
-    "dev:node": "pnpm --filter ./packages/node dev",
     "dev:react": "pnpm --filter ./packages/react dev",
+    "dev:node": "pnpm --filter ./packages/node dev",
+    "dev:next": "pnpm --filter ./packages/next dev",
     "dev": "pnpm /^dev:.*/",
     "lint:next": "pnpm --filter ./packages/next lint",
     "lint:node": "pnpm --filter ./packages/node lint",
@@ -26,7 +26,7 @@
     "type-check:next": "cd packages/next && pnpm type-check",
     "type-check:node": "cd packages/node && pnpm type-check",
     "type-check:react": "cd packages/react && pnpm type-check",
-    "type-check": "pnpm m run type-check"
+    "type-check": "pnpm /^type-check:.*/"
   },
   "devDependencies": {
     "@swc/core": "1.5.5",
