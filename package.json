@@ -26,7 +26,7 @@
     "type-check:next": "cd packages/next && pnpm type-check",
     "type-check:node": "cd packages/node && pnpm type-check",
     "type-check:react": "cd packages/react && pnpm type-check",
-    "type-check": "pnpm /^type-check:.*/"
+    "type-check": "pnpm m run type-check"
   },
   "devDependencies": {
     "@swc/core": "1.5.5",
