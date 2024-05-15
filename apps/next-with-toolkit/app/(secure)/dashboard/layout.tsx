@@ -8,7 +8,7 @@ import * as React from "react";
 import { useUserfront } from "@userfront/next/client";
 import { useRouter } from "next/navigation";
 
-export function Loader() {
+function Loader() {
   return (
     <div className="size-full min-h-screen flex flex-col space-y-4 items-center justify-center">
       <svg
