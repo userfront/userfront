@@ -41,7 +41,7 @@
     "vitest": "1.6.0"
   },
   "workspaces": [
-    "examples/*",
+    "apps/*",
     "packages/*",
     "internals/*",
     "!**/test/**"

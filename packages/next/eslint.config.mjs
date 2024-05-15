@@ -1,23 +1,23 @@
 export default [
   {
-      ignores: [
-        ".git/",
-        "**/.git/",
-        "dist/",
-        "**/dist/",
-        "build/",
-        "**/build/",
-        "public/",
-        "**/public/",
-        ".next/",
-        "**/.next/",
-        "coverage/",
-        "**/coverage/",
-        ".vercel/",
-        "**/.vercel/",
-        "node_modules/",
-        "**/node_modules/"
-      ]
+    ignores: [
+      ".git/",
+      "**/.git/",
+      "dist/",
+      "**/dist/",
+      "build/",
+      "**/build/",
+      "public/",
+      "**/public/",
+      ".next/",
+      "**/.next/",
+      "coverage/",
+      "**/coverage/",
+      ".vercel/",
+      "**/.vercel/",
+      "node_modules/",
+      "**/node_modules/"
+    ]
   },
   {
     rules: {

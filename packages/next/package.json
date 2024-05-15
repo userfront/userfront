@@ -25,7 +25,7 @@
   },
   "scripts": {
     "build": "tsup --cjsInterop",
-    "dev": "tsup --watch",
+    "dev": "tsup --watch --cjsInterop",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
     "test:watch": "vitest watch",

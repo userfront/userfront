@@ -21,11 +21,9 @@ interface UserfrontProviderProps extends UserfrontHookArgs {
   children?: React.ReactNode;
 }
 
-/**
- * Context Provider
- */
-function UserfrontProvider({ children, tenantId }: UserfrontProviderProps) {
-  const value = useUserfront({ tenantId });
+// Context Provider
+function UserfrontProvider({ children, ...props }: UserfrontProviderProps) {
+  const value = useUserfront(props);
 
   return (
     <UserfrontContext.Provider value={value}>
@@ -34,9 +32,7 @@ function UserfrontProvider({ children, tenantId }: UserfrontProviderProps) {
   );
 }
 
-/**
- * External hook
- */
+// External hook
 function useUserfrontContext() {
   const context = React.useContext(UserfrontContext);
 
