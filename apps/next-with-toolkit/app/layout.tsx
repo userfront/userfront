@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { UserfrontProvider } from "@userfront/next/client";
 
 import "./globals.css";
+import { UserfrontLogo } from "./_components/UserfrontLogo";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,12 +15,40 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark:bg-black dark:text-white">
       <body>
         <UserfrontProvider
           tenantId={process.env.NEXT_PUBLIC_USERFRONT_TENANT_ID ?? ""}
+          loginRedirect="/dashboard"
+          requireAuth
         >
-          {children}
+          <div className="min-h-screen flex justify-center items-center text-center">
+            {children}
+          </div>
+          <div className="absolute flex flex-col justify-center items-center w-full space-y-4 bottom-0 p-4">
+            <a
+              href="https://github.com/userfront/userfront"
+              target="_blank"
+              className="flex items-center"
+            >
+              <img
+                src="https://img.shields.io/github/stars/userfront/userfront?style=social"
+                alt="Star Userfront on GitHub"
+              />
+            </a>
+            <a
+              href="https://userfront.com/"
+              target="_blank"
+              className="group flex items-center justify-center gap-x-1 text-sm"
+            >
+              <div className="mt-[3.25px] leading-none opacity-40 transition-opacity duration-300 ease-in-out group-hover:opacity-80">
+                Secured by
+              </div>
+              <div>
+                <UserfrontLogo className="opacity-60 transition-opacity duration-300 ease-in-out group-hover:opacity-100" />
+              </div>
+            </a>
+          </div>
         </UserfrontProvider>
       </body>
     </html>
