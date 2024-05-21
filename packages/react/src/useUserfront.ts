@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useIsomorphicLayoutEffect, useToggle } from "react-use";
 import Userfront from "@userfront/toolkit/react";
-import type { Simplify } from "type-fest";
+// Fix for error TS2742: The inferred type of 'useUserfrontContext' cannot be named without a reference to '@userfront/core'. This is likely not portable. A type annotation is necessary.
 import type * as _Userfront from "@userfront/core";
 
 type UserfrontInstance = Required<typeof Userfront>;

@@ -38,7 +38,7 @@ function useUserfrontContext() {
   const context = React.useContext(UserfrontContext);
 
   if (!context) {
-    throw new Error("useUserfront must be used within an UserfrontProvider");
+    throw new Error("useUserfront must be used within a UserfrontProvider");
   }
 
   return context;

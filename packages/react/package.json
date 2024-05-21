@@ -6,24 +6,37 @@
         "type": "git",
         "url": "https://github.com/userfront/userfront.git"
     },
-    "scripts": {
-        "build": "tsup --cjsInterop",
-        "dev": "tsup --watch --cjsInterop",
-        "lint": "eslint .",
-        "lint:fix": "pnpm lint --fix",
-        "test:watch": "vitest watch",
-        "test": "vitest run",
-        "type-check": "tsc --noEmit"
-    },
+    "keywords": [
+      "userfront",
+      "authentication",
+      "authorization",
+      "javascript",
+      "typescript",
+      "web",
+      "react",
+      "sdk"
+    ],
     "files": [
         "dist"
     ],
-    "exports": "./dist/index.js",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "scripts": {
+      "build": "tsup --cjsInterop",
+      "dev": "tsup --watch --cjsInterop",
+      "lint": "eslint .",
+      "lint:fix": "pnpm lint --fix",
+      "test:watch": "vitest watch",
+      "test": "vitest run",
+      "type-check": "tsc --noEmit"
+    },
     "devDependencies": {
+        "@testing-library/react": "15.0.7",
         "@types/react": "18.3.1",
         "@types/react-dom": "18.3.0",
         "@userfront/core": "0.6.8",
         "@userfront/toolkit": "1.0.9",
+        "@userfront/tsconfig": "workspace:*",
         "@vitejs/plugin-react": "4.2.1",
         "axios": "1.6.8",
         "happy-dom": "14.11.0",
@@ -37,8 +50,5 @@
         "eslint": "9.2.0",
         "react": "18.3.1",
         "react-dom": "18.3.1"
-    },
-  "engines": {
-    "node": ">=20"
-  }
+    }
 }

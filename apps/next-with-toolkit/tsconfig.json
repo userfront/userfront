@@ -1,31 +1,10 @@
 {
+  "extends": "@userfront/tsconfig/react.json",
   "compilerOptions": {
-    "composite": false,
-    "declaration": false,
-    "declarationMap": false,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "inlineSources": false,
-    "isolatedModules": true,
-    "moduleResolution": "bundler",
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "preserveWatchOutput": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "target": "esnext",
-    "module": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "skipLibCheck": true,
     "allowJs": true,
     "noEmit": true,
     "incremental": true,
     "resolveJsonModule": true,
-    "jsx": "preserve",
     "plugins": [
       {
         "name": "next"

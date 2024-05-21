@@ -1,26 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Neutral",
-  "compilerOptions": {
-    "composite": false,
-    "declaration": false,
-    "declarationMap": false,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "inlineSources": false,
-    "isolatedModules": true,
-    "moduleResolution": "bundler",
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "preserveWatchOutput": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "target": "esnext",
-    "module": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "jsx": "react-jsx",
-    "skipLibCheck": true,
-  },
+  "extends": "@userfront/tsconfig/react.json",
   "include": ["tsup.config.ts", "src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "dist"]
 }

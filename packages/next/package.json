@@ -6,25 +6,29 @@
     "type": "git",
     "url": "https://github.com/userfront/userfront.git"
   },
-  "files": [
-    "dist"
-  ],
   "keywords": [
     "userfront",
     "authentication",
     "authorization",
+    "javascript",
     "typescript",
-    "nextjs",
+    "next",
+    "sdk",
     "client",
     "server"
   ],
+  "files": [
+    "dist"
+  ],
   "exports": {
-    ".": "./dist/index.js",
     "./client": "./dist/client.js",
-    "./server": "./dist/server.js"
+    "./server": {
+      "import": "./dist/server.mjs",
+      "require": "./dist/server.js"
+    }
   },
   "scripts": {
-    "build": "tsup --cjsInterop",
+    "build": "tsup --config tsup.client.ts --cjsInterop && tsup --config tsup.server.ts",
     "dev": "tsup --watch --cjsInterop",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
@@ -32,11 +36,12 @@
     "test": "vitest run",
     "type-check": "tsc --noEmit"
   },
+  "dependencies": {
+  },
   "devDependencies": {
     "@microsoft/api-extractor": "7.43.4",
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.0",
-    "@userfront/react": "workspace:*",
     "tsup": "8.0.2",
     "type-fest": "4.18.2",
     "typescript": "5.4.5",
@@ -46,6 +51,8 @@
     "eslint": "9.2.0",
     "next": "14.2.3",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "@userfront/node": "workspace:*",
+    "@userfront/react": "workspace:*"
   }
 }
