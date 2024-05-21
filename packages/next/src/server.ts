@@ -1,3 +1,1 @@
-"use server";
-
-export {};
+export {getTenant, UserfrontClient, type UserfrontClientOptions} from "@userfront/node";

@@ -6,6 +6,21 @@
       "type": "git",
       "url": "https://github.com/userfront/userfront.git"
     },
+    "keywords": [
+      "userfront",
+      "authentication",
+      "authorization",
+      "javascript",
+      "typescript",
+      "node",
+      "sdk",
+      "express"
+    ],
+    "files": [
+      "dist"
+    ],
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
     "scripts": {
       "build": "tsup",
       "dev": "tsup --watch",
@@ -15,29 +30,11 @@
       "test": "vitest run",
       "type-check": "tsc --noEmit"
     },
-    "exports": {
-        ".": {
-            "import": "./dist/index.js",
-            "require": "./dist/index.cjs"
-        },
-        "./*": {
-            "import": "./dist/*.js",
-            "require": "./dist/*.cjs"
-        }
-    },
-    "typesVersions": {
-        "*": {
-            "*": [
-                "src/*.ts"
-            ]
-        }
-    },
-    "dependencies": {
-
-    },
+    "dependencies": {},
     "devDependencies": {
         "@types/react": "18.3.1",
         "@types/react-dom": "18.3.0",
+        "@userfront/tsconfig": "workspace:*",
         "tsup": "8.0.2",
         "type-fest": "4.18.2",
         "typescript": "5.4.5",

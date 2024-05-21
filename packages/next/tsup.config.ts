@@ -1,14 +1,10 @@
-import { defineConfig } from "tsup";
+import type {Options} from "tsup";
 
-export default defineConfig({
-  clean: true, // process.env.NODE_ENV === "production",
+export default {
   dts: true,
-  shims: true,
-  entry: ["src"],
-  // noExternal: ["js-cookie", "@userfront/react"],
-  format: ["cjs"],
+  shims: false,
   minify: process.env.NODE_ENV === "production",
-  platform: "neutral",
-  replaceNodeEnv: true,
+  splitting: false,
   sourcemap: process.env.NODE_ENV === "development" ? "inline" : false,
-});
+  noExternal: ["@userfront/node", "@userfront/react"],
+} as Options;

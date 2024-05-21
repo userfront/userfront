@@ -39,7 +39,7 @@ importers:
         specifier: 1.6.0
         version: 1.6.0(@types/node@20.12.11)(happy-dom@14.11.0)(jsdom@24.0.0)
 
-  apps/next-app-router-with-toolkit:
+  apps/next-with-toolkit:
     dependencies:
       '@userfront/next':
         specifier: workspace:*
@@ -66,6 +66,9 @@ importers:
       '@types/react-dom':
         specifier: 18.3.0
         version: 18.3.0
+      '@userfront/tsconfig':
+        specifier: workspace:*
+        version: link:../../internals/tsconfig
       '@vitejs/plugin-react':
         specifier: 4.2.1
         version: 4.2.1(vite@5.2.11(@types/node@20.12.11))
@@ -91,8 +94,16 @@ importers:
         specifier: 1.6.0
         version: 1.6.0(@types/node@20.12.11)(happy-dom@14.11.0)(jsdom@24.0.0)
 
+  internals/tsconfig: {}
+
   packages/next:
     dependencies:
+      '@userfront/node':
+        specifier: workspace:*
+        version: link:../node
+      '@userfront/react':
+        specifier: workspace:*
+        version: link:../react
       eslint:
         specifier: 9.2.0
         version: 9.2.0
@@ -115,9 +126,6 @@ importers:
       '@types/react-dom':
         specifier: 18.3.0
         version: 18.3.0
-      '@userfront/react':
-        specifier: workspace:*
-        version: link:../react
       tsup:
         specifier: 8.0.2
         version: 8.0.2(@microsoft/api-extractor@7.43.4(@types/node@20.12.11))(@swc/core@1.5.5(@swc/helpers@0.5.5))(postcss@8.4.38)(typescript@5.4.5)
@@ -143,6 +151,9 @@ importers:
       '@types/react-dom':
         specifier: 18.3.0
         version: 18.3.0
+      '@userfront/tsconfig':
+        specifier: workspace:*
+        version: link:../../internals/tsconfig
       tsup:
         specifier: 8.0.2
         version: 8.0.2(@microsoft/api-extractor@7.43.4(@types/node@20.12.11))(@swc/core@1.5.5(@swc/helpers@0.5.5))(postcss@8.4.38)(typescript@5.4.5)
@@ -168,6 +179,9 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
     devDependencies:
+      '@testing-library/react':
+        specifier: 15.0.7
+        version: 15.0.7(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/react':
         specifier: 18.3.1
         version: 18.3.1
@@ -180,6 +194,9 @@ importers:
       '@userfront/toolkit':
         specifier: 1.0.9
         version: 1.0.9(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@userfront/tsconfig':
+        specifier: workspace:*
+        version: link:../../internals/tsconfig
       '@vitejs/plugin-react':
         specifier: 4.2.1
         version: 4.2.1(vite@5.2.11(@types/node@20.12.11))
