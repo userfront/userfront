@@ -1,1 +1,7 @@
-export {getTenant, UserfrontClient, type UserfrontClientOptions} from "@userfront/node";
+export {
+  getTenant,
+  getWorkspace,
+  getUser,
+  UserfrontClient,
+  type UserfrontClientOptions,
+} from "@userfront/node";

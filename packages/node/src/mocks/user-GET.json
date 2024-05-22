@@ -1,0 +1,47 @@
+{
+  "mode": "live",
+  "userId": 1,
+  "userUuid": "099660af-872d-435f-b9c1-148bb03896b7",
+  "username": "mock-user",
+  "email": "loremIpsum@userfront.com",
+  "name": "",
+  "image": "https://res.cloudinary.com/component/image/upload/avatars/avatar-plain-4.png",
+  "phoneNumber": null,
+  "data": {},
+  "locked": false,
+  "isMfaRequired": false,
+  "preferredFirstFactor": {
+    "channel": "email",
+    "strategy": "password"
+  },
+  "preferredSecondFactor": {
+    "channel": "authenticator",
+    "strategy": "totp"
+  },
+  "isEmailConfirmed": true,
+  "isPhoneNumberConfirmed": false,
+  "lastActiveAt": "2024-05-16T00:49:42.077Z",
+  "createdAt": "2024-05-15T23:04:50.787Z",
+  "updatedAt": "2024-05-15T23:04:50.787Z",
+  "tenant": {
+    "tenantId": "mock1234",
+    "aliasId": null,
+    "name": "Next",
+    "image": "https://res.cloudinary.com/component/image/upload/avatars/icon-13.png",
+    "loginRedirectPath": "/dashboard",
+    "logoutRedirectPath": "/login"
+  },
+  "authorization": {},
+  "tenantId": "mock1234",
+  "isConfirmed": true,
+  "uuid": "099660af-872d-435f-b9c1-148bb03896b7",
+  "authentication": {
+    "firstFactors": [
+      {
+        "channel": "email",
+        "strategy": "link"
+      }
+    ],
+    "secondFactors": []
+  }
+}

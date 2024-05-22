@@ -1,0 +1,7 @@
+{
+  "statusCode": 404,
+  "error": {
+    "type": "bad_request_error"
+  },
+  "message": "Not Found"
+}

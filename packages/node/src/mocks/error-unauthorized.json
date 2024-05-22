@@ -1,0 +1,7 @@
+{
+  "statusCode": 401,
+  "error": {
+    "type": "bad_request_error"
+  },
+  "message": "Unauthorized"
+}
