@@ -1,5 +1,8 @@
 {
   "extends": "@userfront/tsconfig/node.json",
-  "include": ["tsup.config.ts", "src/**/*.ts", "src/**/*.tsx"],
+  "compilerOptions": {
+    "resolveJsonModule": true,
+  },
+  "include": ["tsup.config.ts", "vitest.config.ts", "vitest.setup.ts",  "mocks/**/*.ts", "src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "dist"]
 }

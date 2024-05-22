@@ -1,7 +1,11 @@
+/**
+ * Userfront Fetcher
+ *
+ * Used in the Userfront Client, wraps fetch with
+ * better error handling and cURL debug logging.
+ */
 import fetchToCurl from "./fetch-to-curl";
-import {GET, POST, PUT, DELETE, http} from "./http";
-import {isDebug} from "./env";
-import type {Method, FetchUrl, FetchOptions, JsonFetcher} from "./types";
+import type { FetchOptions, FetchUrl, Method } from "./types";
 
 /**
  * Generic Userfront Error Response
@@ -10,7 +14,7 @@ interface UserfrontErrorResponse {
   statusCode: number;
   error: {
     type: string;
-  }
+  };
   message: string;
 }
 
@@ -28,6 +32,9 @@ interface UserfrontFetcherErrorOptions {
   debug?: boolean;
 }
 
+/**
+ * The Userfront Fetcher Error Class is thrown when response is not 2xx
+ */
 class UserfrontFetcherError extends Error {
   code: UserfrontFetcherErrorOptions["code"];
   message: UserfrontFetcherErrorOptions["message"];
@@ -35,12 +42,12 @@ class UserfrontFetcherError extends Error {
   data?: UserfrontFetcherErrorOptions["data"];
 
   constructor({
-                code,
-                message,
-                response,
-                data,
-                debug,
-              }: UserfrontFetcherErrorOptions) {
+    code,
+    message,
+    response,
+    data,
+    debug,
+  }: UserfrontFetcherErrorOptions) {
     // Pass remaining arguments (including vendor specific ones) to parent constructor
     super(message);
 
@@ -60,15 +67,10 @@ class UserfrontFetcherError extends Error {
   }
 }
 
-/**
- * Userfront Fetcher
- * Wraps the fetch API with error handling and debug logging
- */
-async function fetcher(url: FetchUrl, {
-  body,
-  debug,
-  ...init
-}: FetchOptions): Promise<Response> {
+async function fetcher(
+  url: FetchUrl,
+  { body, debug, ...init }: FetchOptions,
+): Promise<Response> {
   const options = {
     /**
      * The credentials read-only property of the Request
@@ -83,13 +85,13 @@ async function fetcher(url: FetchUrl, {
   };
 
   if (debug) {
-    console.log('UserfrontFetcher:', fetchToCurl(String(url), options));
+    console.log("UserfrontFetcher:", fetchToCurl(String(url), options));
   }
 
   const res = await fetch(url, options);
 
-// response.ok is true when res.status is 2xx
-// https://developer.mozilla.org/en-US/docs/Web/API/Response/ok
+  // response.ok is true when res.status is 2xx
+  // https://developer.mozilla.org/en-US/docs/Web/API/Response/ok
   if (res.ok) {
     return res;
   }
@@ -104,18 +106,19 @@ async function fetcher(url: FetchUrl, {
     void error;
   }
 
-// Throw a custom error with the response when status is not 2xx
+  // Throw a custom error with the response when status is not 2xx
   throw new UserfrontFetcherError({
     message: data?.message ?? res.statusText,
     code: data?.statusCode ?? res.status,
     response: res,
     data,
-    debug
+    debug,
   });
 }
 
+export default fetcher;
+
 export {
-  fetcher,
   type UserfrontErrorResponse,
   type UserfrontFetcherErrorOptions,
   UserfrontFetcherError,

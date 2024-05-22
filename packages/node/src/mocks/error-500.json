@@ -1,0 +1,7 @@
+{
+  "statusCode": 500,
+  "error": {
+    "type": "bad_request_error"
+  },
+  "message": "An internal server error occurred"
+}

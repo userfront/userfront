@@ -1,0 +1,101 @@
+{
+  "uuid": "605d88c3-346e-464d-92da-d6d8a370f4dd",
+  "aliasId": null,
+  "name": "Demo Workspace",
+  "type": "basic",
+  "image": "https://res.cloudinary.com/component/image/upload/avatars/icon-13.png",
+  "signupRedirectPath": null,
+  "loginRedirectPath": "/dashboard",
+  "logoutRedirectPath": "/login",
+  "passwordResetPath": "/reset",
+  "pkceLoginRedirectUri": null,
+  "userCreatedWebhookUrl": null,
+  "userUpdatedWebhookUrl": null,
+  "userDeletedWebhookUrl": null,
+  "tenantCreatedWebhookUrl": null,
+  "tenantUpdatedWebhookUrl": null,
+  "tenantDeletedWebhookUrl": null,
+  "verificationCodeSmsWebhookUrl": null,
+  "verificationCodeEmailWebhookUrl": null,
+  "linkEmailWebhookUrl": null,
+  "data": {},
+  "details": {},
+  "brand": {},
+  "providerOrder": [],
+  "isPhoneNumberUnique": true,
+  "cookieOptionsSameSite": "Lax",
+  "cookieOptionsPath": "/",
+  "cookieOptionsSetDomain": false,
+  "allowNonHttpOnlyRefresh": true,
+  "accessTokenDuration": 604800,
+  "refreshTokenDuration": 2592000,
+  "dataRetentionMonths": 24,
+  "lastActiveAt": "2024-05-21T21:40:34.946Z",
+  "dataForParent": {
+    "activation": {
+      "last_configured_auth_at": "2024-05-15T20:22:57.726Z",
+      "has_copied_api_key_live_mode": true,
+      "last_copied_api_key_live_mode_at": "2024-05-21T21:40:34.770Z"
+    }
+  },
+  "dataForParentSchema": [],
+  "previousAuthService": null,
+  "creator": {
+    "userId": 1,
+    "name": "",
+    "username": "lorem-ipsum",
+    "email": "loremIpsum@userfront.com",
+    "image": "https://res.cloudinary.com/component/image/upload/avatars/avatar-plain-5.png",
+    "lastActiveAt": "2024-05-21T21:40:34.939+00:00"
+  },
+  "parent": {
+    "tenantId": "unknown0",
+    "image": "https://res.cloudinary.com/component/image/upload/avatars/icon-47.png",
+    "name": "Userfront",
+    "mode": "live"
+  },
+  "children": {
+    "totalCount": 0,
+    "totalPages": 0,
+    "results": []
+  },
+  "roles": [
+    {
+      "name": "subscriber"
+    },
+    {
+      "name": "viewer"
+    },
+    {
+      "name": "contributor"
+    },
+    {
+      "name": "support"
+    },
+    {
+      "name": "member"
+    },
+    {
+      "name": "editor"
+    },
+    {
+      "name": "author"
+    },
+    {
+      "name": "admin"
+    },
+    {
+      "name": "owner"
+    }
+  ],
+  "hasActivatedLiveMode": true,
+  "mode": "test",
+  "descendantCount": {
+    "descendants": 0,
+    "children": 0,
+    "basic": 0,
+    "multiuser": 0,
+    "enterprise": 0
+  },
+  "tenantId": "demo1234"
+}

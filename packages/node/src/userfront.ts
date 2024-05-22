@@ -1,19 +1,21 @@
-import {EventEmitter} from "node:events";
+/**
+ * Userfront Client
+ */
 // Fix for error TS9006: Declaration emit for this file requires using private name 'StaticEventEmitterOptions' from module '"events"'. An explicit type annotation may unblock declaration emit.
-import type * as _EventEmitter from "node:events";
+import { EventEmitter } from "node:events";
 
-import {fetcher} from "./fetcher";
+import fetcher from "./fetcher";
 import {
   isDebug,
   isProduction,
   USERFRONT_API_KEY,
   USERFRONT_API_URL,
   USERFRONT_API_VERSION,
-  USERFRONT_WORKSPACE_ID
+  USERFRONT_WORKSPACE_ID,
 } from "./env";
-import type {Mode, Fetcher, JsonFetcher} from "./types";
-import {api} from "./api";
-import {http} from "./http";
+import type { Mode } from "./types";
+import api from "./api";
+import http from "./http";
 
 interface UserfrontClientOptions {
   /**
@@ -57,57 +59,31 @@ interface UserfrontClientOptions {
  * Uses the `UserfrontFetcher` to handle requests and responses.
  */
 class UserfrontClient extends EventEmitter {
+  /**
+   * Get the current workspace
+   */
+  public getWorkspace: (typeof api)["getWorkspace"];
+  /**
+   * Get a specific tenant by id
+   */
+  public getTenant: (typeof api)["getTenant"];
+  /**
+   * Get a specific user by id
+   */
+  public getUser: (typeof api)["getUser"];
   private readonly apiKey: UserfrontClientOptions["apiKey"];
   private readonly baseUrl: UserfrontClientOptions["baseUrl"];
-  private readonly apiUrl: string;
   private readonly version: UserfrontClientOptions["version"];
   private readonly workspaceId: UserfrontClientOptions["workspaceId"];
   private readonly mode: UserfrontClientOptions["mode"];
   private readonly origin?: UserfrontClientOptions["origin"];
   private readonly isDebug: UserfrontClientOptions["debug"];
-  /**
-   * Get the current workspace
-   */
-  public getWorkspace: typeof api["getWorkspace"];
-  /**
-   * Get a specific tenant by id
-   */
-  public getTenant: typeof api["getTenant"];
-  /**
-   * Get a specific user by id
-   */
-  public getUser: typeof api["getUser"];
-
-
-  /**
-   * Initialize the Userfront SDK, this will throw errors
-   * when the required options are missing or invalid.
-   */
-  private init() {
-    // @ts-expect-error TS2304: Cannot find name window
-    if (typeof window !== "undefined") {
-      throw new Error("The Userfront Node SDK is not supported in the browser.");
-    }
-    if (!this.apiKey || !this.apiKey.match(/^uf_(live|test)_admin_/g)) {
-      throw new Error("A valid Userfront admin API key is required.");
-    }
-    if (!this.workspaceId || this.workspaceId.length > 8) {
-      throw new Error("A valid Userfront workspace ID is required.");
-    }
-    if (this.version && (this.version.length > 2 || !this.version.startsWith("v"))) {
-      throw new Error("A valid Userfront API version is required.");
-    }
-    if (this.isDebug && isProduction) {
-      throw new Error("Debug mode is not permitted in production.");
-    }
-  }
 
   constructor(options?: Partial<UserfrontClientOptions>) {
     super();
 
     this.baseUrl = options?.baseUrl ?? USERFRONT_API_URL;
     this.version = options?.version ?? USERFRONT_API_VERSION;
-    this.apiUrl = `${this.baseUrl}${this.version ? `/${this.version}` : ""}`;
 
     this.apiKey = options?.apiKey ?? USERFRONT_API_KEY;
     this.workspaceId = options?.workspaceId ?? USERFRONT_WORKSPACE_ID;
@@ -118,36 +94,67 @@ class UserfrontClient extends EventEmitter {
     // Confirm the configuration and environments are valid
     this.init();
 
+    // Custom fetch for the HTTP client
     const fetchConfig = {
       apiKey: this.apiKey,
       baseUrl: this.baseUrl,
       version: this.version,
-      fetch: (...args: Parameters<typeof fetcher>) => fetcher(args[0], {
-        ...args[1],
-        debug: this.isDebug
+      fetch: (...args: Parameters<typeof fetcher>) =>
+        fetcher(args[0], {
+          ...args[1],
+          debug: this.isDebug,
+        }),
+    };
+
+    // Bind the custom fetch to the HTTP client fetcher
+    const fetcherConfig = {
+      fetchJson: http.fetchJson.bind({
+        fetcher: http.fetcher.bind(fetchConfig),
       }),
     };
 
+    // Bind the custom fetcher to the HTTP client
     const httpConfig = {
-      fetchJson: http.fetchJson.bind({
-        fetcher: http.fetcher.bind(fetchConfig)
-      })
-    };
-
-    const config = {
       workspaceId: this.workspaceId,
       mode: this.mode,
-      GET: http.GET.bind(httpConfig),
-      POST: http.POST.bind(httpConfig),
-      PUT: http.PUT.bind(httpConfig),
-      DELETE: http.DELETE.bind(httpConfig),
+      GET: http.GET.bind(fetcherConfig),
+      POST: http.POST.bind(fetcherConfig),
+      PUT: http.PUT.bind(fetcherConfig),
+      DELETE: http.DELETE.bind(fetcherConfig),
     };
 
+    // Bind the API client calls to the HTTP configuration
     // (Next.js) Warning: Cannot bind "this" of a Server Action. Pass null or undefined as the first argument to .bind().
-    this.getWorkspace = api.getWorkspace.bind(config);
-    this.getTenant = api.getTenant.bind(config);
-    this.getUser = api.getUser.bind(config);
+    this.getWorkspace = api.getWorkspace.bind(httpConfig);
+    this.getTenant = api.getTenant.bind(httpConfig);
+    this.getUser = api.getUser.bind(httpConfig);
+  }
+
+  /**
+   * Initialize the Userfront SDK, this will throw errors
+   * when the required options are missing or invalid.
+   */
+  private init() {
+    // @ts-expect-error TS2304: Cannot find name window
+    if (typeof window !== "undefined") {
+      throw new Error("The Userfront Node SDK is not supported in the browser");
+    }
+    if (!this.apiKey || !this.apiKey.match(/^uf_(live|test)_admin_/g)) {
+      throw new Error("A valid Userfront admin API key is required");
+    }
+    if (!this.workspaceId || this.workspaceId.length > 8) {
+      throw new Error("A valid Userfront workspace ID is required");
+    }
+    if (
+      this.version &&
+      (this.version.length > 2 || !this.version.startsWith("v"))
+    ) {
+      throw new Error("A valid Userfront API version is required");
+    }
+    if (this.isDebug && isProduction) {
+      throw new Error("Debug mode is not permitted in production");
+    }
   }
 }
 
-export {UserfrontClient, type UserfrontClientOptions};
+export { UserfrontClient, type UserfrontClientOptions };
