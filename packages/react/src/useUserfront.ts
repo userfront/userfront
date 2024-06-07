@@ -16,7 +16,7 @@ interface UserfrontOptions {
    */
   skeleton?: React.ReactNode | null;
   /**
-   * Where to redirect users that need to login
+   * Redirect URL for unauthenticated visitors that need to login
    * @default "/login"
    */
   loginUrl?: string;

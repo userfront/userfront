@@ -29,15 +29,14 @@
   },
   "scripts": {
     "build": "tsup --config tsup.client.ts --cjsInterop && tsup --config tsup.server.ts",
-    "dev": "tsup --watch --cjsInterop",
+    "dev": "tsup --config tsup.client.ts --cjsInterop --watch && tsup --config tsup.server.ts --watch",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
     "test:watch": "vitest watch",
     "test": "vitest run",
-    "type-check": "tsc --noEmit"
+    "check-types": "tsc --noEmit"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@microsoft/api-extractor": "7.43.4",
     "@types/react": "18.3.1",
