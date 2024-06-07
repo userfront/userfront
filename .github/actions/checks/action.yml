@@ -1,0 +1,19 @@
+name: "Checks"
+runs:
+  using: "composite"
+  steps:
+    - name: Lint
+      run: pnpm run lint
+      shell: bash
+
+    - name: Build
+      run: pnpm run build
+      shell: bash
+
+    - name: Check types
+      run: pnpm run check-types
+      shell: bash
+
+    - name: Unit tests
+      run: pnpm run test
+      shell: bash
