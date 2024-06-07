@@ -28,7 +28,7 @@
     "lint:fix": "pnpm lint --fix",
     "test:watch": "vitest watch",
     "test": "vitest run",
-    "type-check": "tsc --noEmit"
+    "check-types": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/react": "18.3.1",

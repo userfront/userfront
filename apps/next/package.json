@@ -1,5 +1,5 @@
 {
-  "name": "next-with-toolkit",
+  "name": "@userfront/next",
   "version": "0.0.0",
   "private": true,
   "scripts": {

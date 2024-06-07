@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     router.push("/login");
   }, [isAuthenticated, isLoading, router]);
 
-  // Show a loading spinner while the authentication is being determined
+  // Loading state while the authentication is being determined
   if (!isAuthenticated || isLoading) {
     return null;
   }
