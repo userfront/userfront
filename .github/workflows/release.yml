@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - "**"
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -12,7 +15,6 @@ permissions:
 
 env:
   CI: true
-  PNPM_CACHE_FOLDER: .pnpm-store
 
 jobs:
   release:
@@ -40,15 +42,11 @@ jobs:
       - name: Checks for known security issues with the installed packages
         run: pnpm audit
 
-      - name: Setup npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-
       - name: Create and publish versions
         uses: changesets/action@v1
         with:
           version: pnpm ci:version
-          commit: "chore: update versions"
-          title: "chore: update versions"
           publish: pnpm ci:publish
         env:
           GITHUB_TOKEN: ${{ secrets.CHANGESET_GH_KEY }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
