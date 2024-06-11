@@ -7,5 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@userfront/express", "@userfront/next"]
+  "ignore": ["@userfront/express"]
 }
