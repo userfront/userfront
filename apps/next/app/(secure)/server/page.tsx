@@ -6,7 +6,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { getWorkspace } from "@userfront/next/server";
+import { getTenant } from "@userfront/next/server";
 
 function DescriptionList({ data }: { data: (boolean | React.ReactNode[])[] }) {
   return (
@@ -24,7 +24,7 @@ function DescriptionList({ data }: { data: (boolean | React.ReactNode[])[] }) {
 }
 
 export default async function DashboardPage() {
-  const workspace = await getWorkspace();
+  const tenant = await getTenant();
 
   return (
     <>
@@ -38,60 +38,60 @@ export default async function DashboardPage() {
         <div className="flex flex-col gap-y-4">
           <h2 className="font-bold">Current Workspace</h2>
           <Image
-            src={workspace.image}
-            alt={workspace.name}
+            src={tenant.image}
+            alt={tenant.name}
             width={320}
             height={320}
             className="w-12 h-12 mx-auto"
           />
           <DescriptionList
             data={[
-              ["UUID", workspace.uuid],
-              ["Name", workspace.name],
-              ["Tenant ID", workspace.tenantId],
+              ["UUID", tenant.uuid],
+              ["Name", tenant.name],
+              ["Tenant ID", tenant.tenantId],
               [
                 "Alias",
-                workspace.aliasId ?? <span className="opacity-50">None</span>,
+                tenant.aliasId ?? <span className="opacity-50">None</span>,
               ],
-              ["Type", workspace.type],
+              ["Type", tenant.type],
             ]}
           />
         </div>
         <div className="flex flex-col gap-y-4 pt-4">
           <h2 className="font-bold">Parent Workspace</h2>
           <Image
-            src={workspace.parent.image}
-            alt={workspace.parent.name}
+            src={tenant.parent.image}
+            alt={tenant.parent.name}
             width={320}
             height={320}
             className="w-12 h-12 mx-auto"
           />
           <DescriptionList
             data={[
-              ["Name", workspace.parent.name],
-              ["Tenant ID", workspace.parent.tenantId],
-              ["mode", workspace.parent.mode],
+              ["Name", tenant.parent.name],
+              ["Tenant ID", tenant.parent.tenantId],
+              ["mode", tenant.parent.mode],
             ]}
           />
         </div>
         <div className="flex flex-col gap-y-4 pt-4">
           <h2 className="font-bold">Workspace Creator</h2>
           <Image
-            src={workspace.creator.image}
-            alt={workspace.creator.name}
+            src={tenant.creator.image}
+            alt={tenant.creator.name}
             width={320}
             height={320}
             className="w-12 h-12 mx-auto"
           />
           <DescriptionList
             data={[
-              !!workspace.creator.name && ["Name", workspace.creator.name],
-              ["Email Address", workspace.creator.email],
-              ["User ID", workspace.creator.userId],
-              ["Username", workspace.creator.username],
+              !!tenant.creator.name && ["Name", tenant.creator.name],
+              ["Email Address", tenant.creator.email],
+              ["User ID", tenant.creator.userId],
+              ["Username", tenant.creator.username],
               [
                 "Last Active",
-                new Date(workspace.creator.lastActiveAt).toLocaleString(),
+                new Date(tenant.creator.lastActiveAt).toLocaleString(),
               ],
             ].filter(Boolean)}
           />

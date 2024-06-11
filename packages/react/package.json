@@ -1,6 +1,6 @@
 {
   "name": "@userfront/react",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "description": "Transform your React application with Userfront authentication",
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
     "@userfront/tsconfig": "workspace:*",
     "@vitejs/plugin-react": "4.2.1",
     "axios": "1.6.8",
+    "eslint": "9.2.0",
     "happy-dom": "14.11.0",
     "react-use": "17.5.0",
     "tsup": "8.0.2",
@@ -47,8 +48,7 @@
     "vitest": "1.6.0"
   },
   "peerDependencies": {
-    "eslint": "9.2.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react": "^18",
+    "react-dom": "^18"
   }
 }

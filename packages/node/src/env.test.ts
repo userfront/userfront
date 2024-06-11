@@ -12,7 +12,7 @@ describe("env", () => {
       "USERFRONT_API_KEY",
       "USERFRONT_API_URL",
       "USERFRONT_API_VERSION",
-      "USERFRONT_WORKSPACE_ID",
+      "USERFRONT_TENANT_ID",
     ]);
     expect(env.isDevelopment).toBe(true);
     expect(env.isProduction).toBe(false);

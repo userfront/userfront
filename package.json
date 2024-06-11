@@ -1,6 +1,6 @@
 {
   "name": "@userfront/userfront",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "TypeScript monorepo for Userfront NPM packages",
   "private": true,
   "scripts": {
