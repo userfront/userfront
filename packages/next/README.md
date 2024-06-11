@@ -106,7 +106,7 @@ Define these environment variables in your `.env` or however they are configured
 
 ```
 USERFRONT_API_KEY="..."
-USERFRONT_WORKSPACE_ID="..."
+USERFRONT_TENANT_ID="..."
 ```
 
 The SDK will use these variables when they are defined.
@@ -145,7 +145,7 @@ const tenant = await Userfront.getTenant("...");
 | `apiKey`      | `USERFRONT_API_KEY`                           | The secret admin API key, from [Authentication / API Keys](https://userfront.com/dashboard/api-keys) in the Userfront dashboard.                                                                        |
 | `baseUrl`     | `'https://api.userfront.com'`                 | The API URL to use for requests, in case you're using a proxy or custom domain.                                                                                                                         |
 | `version`     | `'v0'`                                        | The API version to use, an empty string will remove the version from requests.                                                                                                                          |
-| `workspaceId` | `USERFRONT_WORKSPACE_ID`                      | The parent workspace ID, this can be found on the [Userfront dashboard](https://userfront.com/dashboard).                                                                                               |
+| `workspaceId` | `USERFRONT_TENANT_ID`                         | The parent workspace ID, this can be found on the [Userfront dashboard](https://userfront.com/dashboard).                                                                                               |
 | `mode`        | `NODE_ENV === 'production' ? 'live' : 'test'` | The mode to use, `live` when `process.env.NODE_ENV` is `production`, otherwise `test`. To enable `live` mode, visit [Live Domains](https://userfront.com/dashboard/domains) in the Userfront dashboard. |
 | `origin`      | `undefined`                                   | The origin header for requests, this may be required in some cases.                                                                                                                                     |
 | `debug`       | `NODE_ENV !== 'production'`                   | Log a cURL per request, disabled when `process.env.NODE_ENV` is `production`.                                                                                                                           |

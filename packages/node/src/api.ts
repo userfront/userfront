@@ -5,11 +5,11 @@
  */
 import { DELETE, GET, POST, PUT } from "./http";
 import type { Mode, Tenant, User } from "./types";
-import { isProduction, USERFRONT_WORKSPACE_ID } from "./env";
+import { isProduction, USERFRONT_TENANT_ID } from "./env";
 
 const config = {
   mode: isProduction ? "live" : ("test" as Mode),
-  workspaceId: USERFRONT_WORKSPACE_ID,
+  workspaceId: USERFRONT_TENANT_ID,
   GET: GET,
   POST: POST,
   PUT: PUT,

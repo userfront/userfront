@@ -11,7 +11,7 @@ import {
   USERFRONT_API_KEY,
   USERFRONT_API_URL,
   USERFRONT_API_VERSION,
-  USERFRONT_WORKSPACE_ID,
+  USERFRONT_TENANT_ID,
 } from "./env";
 import type { Mode } from "./types";
 import api from "./api";
@@ -36,7 +36,7 @@ interface UserfrontClientOptions {
   version: string;
   /**
    * The parent workspace ID, this can be found on the [Userfront dashboard](https://userfront.com/dashboard)
-   * @default process.env.USERFRONT_WORKSPACE_ID
+   * @default process.env.USERFRONT_TENANT_ID
    */
   workspaceId: string;
   /**
@@ -86,7 +86,7 @@ class UserfrontClient extends EventEmitter {
     this.version = options?.version ?? USERFRONT_API_VERSION;
 
     this.apiKey = options?.apiKey ?? USERFRONT_API_KEY;
-    this.workspaceId = options?.workspaceId ?? USERFRONT_WORKSPACE_ID;
+    this.workspaceId = options?.workspaceId ?? USERFRONT_TENANT_ID;
 
     this.mode = options?.mode ?? (isProduction ? "live" : "test");
     this.isDebug = options?.debug ?? isDebug;
