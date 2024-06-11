@@ -9,7 +9,7 @@ import { isProduction, USERFRONT_TENANT_ID } from "./env";
 
 const config = {
   mode: isProduction ? "live" : ("test" as Mode),
-  workspaceId: USERFRONT_TENANT_ID,
+  tenantId: USERFRONT_TENANT_ID,
   GET: GET,
   POST: POST,
   PUT: PUT,
@@ -18,13 +18,10 @@ const config = {
 
 const api = {
   ...config,
-  getWorkspace: async function <T extends string>() {
+  getTenant: async function <T extends string>(id?: T) {
     return this.GET<Tenant<typeof this.mode, T>>(
-      `/tenants/${this.workspaceId}`,
+      `/tenants/${id ? id : this.tenantId}`,
     );
-  },
-  getTenant: async function <T extends string>(id: T) {
-    return this.GET<Tenant<typeof this.mode, T>>(`/tenants/${id}`);
   },
   getUser: async function <T extends string>(uuid: T) {
     return this.GET<User<typeof this.mode, T>>(`/users/${uuid}`);
@@ -34,12 +31,7 @@ const api = {
 export default api;
 
 /**
- * Get a specific tenant by id or the current workspace
- */
-export const getWorkspace = api.getWorkspace.bind(config);
-
-/**
- * Get a specific tenant by id or the current workspace
+ * Get a specific tenant by id or the current tenant
  */
 export const getTenant = api.getTenant.bind(config);
 

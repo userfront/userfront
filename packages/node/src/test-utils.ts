@@ -9,13 +9,13 @@ export const mockLiveAdminApiKey =
   "uf_live_admin_mock1234_605d88c3346e464d92dad6d8a370f4dd";
 export const mockLiveReadOnlyApiKey =
   "uf_live_readonly_mock1234_605d88c3346e464d92dad6d8a370f4dd";
-export const mockWorkspaceId = mockWorkspace.tenantId;
-export const demoWorkspaceId = demoWorkspace.tenantId;
+export const mockTenantId = mockWorkspace.tenantId;
+export const demoTenantId = demoWorkspace.tenantId;
 export const mockUserUuid = mockUser.uuid;
 
 export const httpConfig = {
   mode,
-  workspaceId: mockWorkspaceId,
+  tenantId: mockTenantId,
   fetchJson: http.fetchJson.bind({
     fetcher: http.fetcher.bind({
       apiKey: "",
@@ -28,7 +28,7 @@ export const httpConfig = {
 
 export const apiConfig = {
   mode,
-  workspaceId: mockWorkspaceId,
+  tenantId: mockTenantId,
   GET: http.GET.bind(httpConfig),
   POST: http.POST.bind(httpConfig),
   PUT: http.PUT.bind(httpConfig),

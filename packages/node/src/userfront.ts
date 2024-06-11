@@ -38,7 +38,7 @@ interface UserfrontClientOptions {
    * The parent workspace ID, this can be found on the [Userfront dashboard](https://userfront.com/dashboard)
    * @default process.env.USERFRONT_TENANT_ID
    */
-  workspaceId: string;
+  tenantId: string;
   /**
    * The mode to use - defaults to `live` when `process.env.NODE_ENV` is `production`, otherwise `test`.
    * To enable `live` mode, visit [Live Domains](https://userfront.com/dashboard/domains) in the Userfront dashboard.
@@ -60,10 +60,6 @@ interface UserfrontClientOptions {
  */
 class UserfrontClient extends EventEmitter {
   /**
-   * Get the current workspace
-   */
-  public getWorkspace: (typeof api)["getWorkspace"];
-  /**
    * Get a specific tenant by id
    */
   public getTenant: (typeof api)["getTenant"];
@@ -74,7 +70,7 @@ class UserfrontClient extends EventEmitter {
   private readonly apiKey: UserfrontClientOptions["apiKey"];
   private readonly baseUrl: UserfrontClientOptions["baseUrl"];
   private readonly version: UserfrontClientOptions["version"];
-  private readonly workspaceId: UserfrontClientOptions["workspaceId"];
+  private readonly tenantId: UserfrontClientOptions["tenantId"];
   private readonly mode: UserfrontClientOptions["mode"];
   private readonly origin?: UserfrontClientOptions["origin"];
   private readonly isDebug: UserfrontClientOptions["debug"];
@@ -86,7 +82,7 @@ class UserfrontClient extends EventEmitter {
     this.version = options?.version ?? USERFRONT_API_VERSION;
 
     this.apiKey = options?.apiKey ?? USERFRONT_API_KEY;
-    this.workspaceId = options?.workspaceId ?? USERFRONT_TENANT_ID;
+    this.tenantId = options?.tenantId ?? USERFRONT_TENANT_ID;
 
     this.mode = options?.mode ?? (isProduction ? "live" : "test");
     this.isDebug = options?.debug ?? isDebug;
@@ -115,7 +111,7 @@ class UserfrontClient extends EventEmitter {
 
     // Bind the custom fetcher to the HTTP client
     const httpConfig = {
-      workspaceId: this.workspaceId,
+      tenantId: this.tenantId,
       mode: this.mode,
       GET: http.GET.bind(fetcherConfig),
       POST: http.POST.bind(fetcherConfig),
@@ -125,7 +121,6 @@ class UserfrontClient extends EventEmitter {
 
     // Bind the API client calls to the HTTP configuration
     // (Next.js) Warning: Cannot bind "this" of a Server Action. Pass null or undefined as the first argument to .bind().
-    this.getWorkspace = api.getWorkspace.bind(httpConfig);
     this.getTenant = api.getTenant.bind(httpConfig);
     this.getUser = api.getUser.bind(httpConfig);
   }
@@ -142,7 +137,7 @@ class UserfrontClient extends EventEmitter {
     if (!this.apiKey || !this.apiKey.match(/^uf_(live|test)_admin_/g)) {
       throw new Error("A valid Userfront admin API key is required");
     }
-    if (!this.workspaceId || this.workspaceId.length > 8) {
+    if (!this.tenantId || this.tenantId.length > 8) {
       throw new Error("A valid Userfront workspace ID is required");
     }
     if (
