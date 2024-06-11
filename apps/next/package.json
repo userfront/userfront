@@ -24,8 +24,8 @@
     "eslint": "8",
     "eslint-config-next": "14.2.3",
     "happy-dom": "14.11.0",
-    "postcss": "8",
+    "postcss": "8.4.38",
     "tailwindcss": "3.4.1",
-    "typescript": "5"
+    "typescript": "5.4.5"
   }
 }
