@@ -1,6 +1,6 @@
 {
   "name": "@userfront/next",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Transform your Next.js application with Userfront authentication",
   "repository": {
     "type": "git",
