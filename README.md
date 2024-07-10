@@ -6,6 +6,12 @@
   <br />
 </p>
 
-# TypeScript SDKs
+# Userfront SDKs
 
-[![Node CI](https://github.com/userfront/userfront/actions/workflows/node.yml/badge.svg)](https://github.com/userfront/userfront/actions/workflows/node.yml) [![Release](https://github.com/userfront/userfront/actions/workflows/release.yml/badge.svg)](https://github.com/userfront/userfront/actions/workflows/release.yml)
+[![CI](https://github.com/userfront/userfront/actions/workflows/node.yml/badge.svg)](https://github.com/userfront/userfront/actions/workflows/node.yml)
+
+Monorepo for Userfront's various SDKs.
+
+- [Node](https://github.com/userfront/userfront/tree/main/packages/node)
+- [Next.js](https://github.com/userfront/userfront/tree/main/packages/next)
+- [React](https://github.com/userfront/userfront/tree/main/packages/react)
