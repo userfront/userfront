@@ -13,5 +13,5 @@ export default defineConfig({
   banner: {
     js: `"use client";`
   },
-  platform: "browser"
+  platform: "browser",
 });

@@ -22,7 +22,7 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "scripts": {
-    "build": "tsup --cjsInterop",
+    "build": "cross-env NODE_ENV=production tsup --cjsInterop",
     "dev": "tsup --watch --cjsInterop",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",

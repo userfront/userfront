@@ -6,13 +6,12 @@ import { EventEmitter } from "node:events";
 
 import fetcher from "./fetcher";
 import {
-  isDebug,
-  isProduction,
   USERFRONT_API_KEY,
   USERFRONT_API_URL,
   USERFRONT_API_VERSION,
   USERFRONT_TENANT_ID,
 } from "./env";
+import { isDebug, isProduction } from "../../utils";
 import type { Mode } from "./types";
 import api from "./api";
 import http from "./http";
