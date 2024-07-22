@@ -5,7 +5,8 @@
  */
 import { DELETE, GET, POST, PUT } from "./http";
 import type { Mode, Tenant, User } from "./types";
-import { isProduction, USERFRONT_TENANT_ID } from "./env";
+import { USERFRONT_TENANT_ID } from "./env";
+import { isProduction } from "../../utils";
 
 const config = {
   mode: isProduction ? "live" : ("test" as Mode),

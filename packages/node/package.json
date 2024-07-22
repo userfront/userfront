@@ -32,7 +32,7 @@
     }
   },
   "scripts": {
-    "build": "tsup",
+    "build": "cross-env NODE_ENV=production tsup",
     "dev": "tsup --watch",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",

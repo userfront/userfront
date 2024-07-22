@@ -1,7 +1,3 @@
-export const isDevelopment = process.env.NODE_ENV !== "production";
-export const isProduction = process.env.NODE_ENV === "production";
-export const isDebug = !!process.env.DEBUG || isDevelopment;
-
 export const USERFRONT_API_KEY = process.env.USERFRONT_API_KEY ?? "";
 export const USERFRONT_API_URL =
   process.env.USERFRONT_API_URL ?? "https://api.userfront.com";

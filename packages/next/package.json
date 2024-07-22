@@ -37,7 +37,7 @@
     }
   },
   "scripts": {
-    "build": "tsup --config tsup.client.ts --cjsInterop && tsup --config tsup.server.ts",
+    "build": "cross-env NODE_ENV=production tsup --config tsup.client.ts --cjsInterop && cross-env NODE_ENV=production tsup --config tsup.server.ts",
     "dev": "tsup --config tsup.client.ts --cjsInterop --watch && tsup --config tsup.server.ts --watch",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
