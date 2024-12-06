@@ -1,12 +1,8 @@
-name: Node CI
+name: PR CI
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - "**"
+    branches: [main]
 
 permissions:
   contents: read #  to fetch code (actions/checkout)

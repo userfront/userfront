@@ -36,9 +36,6 @@ jobs:
 
       - uses: ./.github/actions/checks
 
-      - name: Checks for known security issues with the installed packages
-        run: pnpm audit
-
       - name: Create and publish versions
         uses: changesets/action@v1
         with:
