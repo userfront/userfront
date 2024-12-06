@@ -43,6 +43,11 @@ interface UserfrontOptions {
    * @default true
    */
   requireAuth?: boolean;
+  /**
+   * Base URL for the Userfront API
+   * If not set defaults to "https://api.userfront.com/v0/"
+   */
+  baseUrl?: string;
 }
 
 // Internal hook
@@ -54,6 +59,7 @@ export function useUserfront({
   signupRedirect,
   logoutRedirect,
   requireAuth = true,
+  baseUrl,
 }: UserfrontOptions) {
   const [userfront, setUserfront] =
     React.useState<UserfrontInstance>(Userfront);
@@ -65,7 +71,11 @@ export function useUserfront({
     if (!tenantId) return;
 
     (async () => {
-      await Userfront.init(tenantId);
+      const opts = {
+        baseUrl,
+        userfrontSource: "userfront-react",
+      };
+      await Userfront.init(tenantId, opts);
 
       // Update the Userfront state
       setUserfront(Userfront);
