@@ -17,9 +17,7 @@
     "client",
     "server"
   ],
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "exports": {
     "./client": {
       "types": "./dist/client.d.ts",
@@ -59,8 +57,8 @@
     "vitest": "1.6.0"
   },
   "peerDependencies": {
-    "next": "^14",
-    "react": "^18",
-    "react-dom": "^18"
+    "next": "14 || 15",
+    "react": "18 || 19",
+    "react-dom": "18 || 19"
   }
 }

@@ -1,72 +1,78 @@
 {
-  "name": "@userfront/userfront",
-  "version": "1.0.0",
-  "description": "TypeScript monorepo for Userfront NPM packages",
-  "private": true,
-  "scripts": {
-    "build:next": "pnpm --filter ./packages/next build",
-    "build:node": "pnpm --filter ./packages/node build",
-    "build:react": "pnpm --filter ./packages/react build",
-    "build": "pnpm run build:node && pnpm run build:react && pnpm run build:next",
-    "clean": "pnpm store prune && rm -rf node_modules",
-    "dev:react": "pnpm --filter ./packages/react dev",
-    "dev:node": "pnpm --filter ./packages/node dev",
-    "dev:next": "pnpm --filter ./packages/next dev",
-    "dev": "pnpm /^dev:.*/",
-    "lint:next": "pnpm --filter ./packages/next lint",
-    "lint:node": "pnpm --filter ./packages/node lint",
-    "lint:react": "pnpm --filter ./packages/react lint",
-    "lint": "pnpm m run lint",
-    "pre-commit": "pnpm lint",
-    "pre-push": "pnpm test && pnpm check-types",
-    "test:next": "pnpm --filter ./packages/next test",
-    "test:node": "pnpm --filter ./packages/node test",
-    "test:react": "pnpm --filter ./packages/react test",
-    "test:utils": "npx vitest packages/utils --run",
-    "test": "pnpm /^test:.*/",
-    "check-types:next": "cd packages/next && pnpm check-types",
-    "check-types:node": "cd packages/node && pnpm check-types",
-    "check-types:react": "cd packages/react && pnpm check-types",
-    "check-types": "pnpm m run check-types",
-    "changeset": "changeset",
-    "release": "changeset publish",
-    "version": "changeset version",
-    "ci:version": "pnpm version",
-    "ci:publish": "pnpm publish -r",
-    "manual:publish": "pnpm publish -r"
-  },
-  "devDependencies": {
-    "@changesets/cli": "2.27.3",
-    "@swc/core": "1.5.5",
-    "@types/node": "20.12.11",
-    "commitizen": "4.3.0",
-    "cross-env": "7.0.3",
-    "eslint": "9.2.0",
-    "husky": "9.0.11",
-    "lint-staged": "15.2.2",
-    "prettier": "3.2.5",
-    "semantic-release": "23.1.1",
-    "tsup": "8.0.2",
-    "typescript": "5.4.5",
-    "vitest": "1.6.0"
-  },
-  "workspaces": [
-    "apps/*",
-    "packages/*",
-    "internals/*",
-    "!**/test/**"
-  ],
-  "engines": {
-    "node": ">=20",
-    "pnpm": ">=8"
-  },
-  "dependencies": {
-    "@changesets/changelog-github": "0.5.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "qs@>=6.5.0 <6.5.3": ">=6.5.3",
-      "express@<4.19.2": ">=4.19.2"
-    }
-  }
+	"name": "@userfront/userfront",
+	"version": "1.0.0",
+	"description": "TypeScript monorepo for Userfront NPM packages",
+	"private": true,
+	"scripts": {
+		"build:next": "pnpm --filter ./packages/next build",
+		"build:node": "pnpm --filter ./packages/node build",
+		"build:react": "pnpm --filter ./packages/react build",
+		"build:toolkit": "pnpm --filter ./packages/toolkit build",
+		"build": "pnpm run build:node && pnpm run build:toolkit && pnpm run build:react && pnpm run build:next",
+		"clean": "pnpm store prune && rm -rf node_modules",
+		"dev:react": "pnpm --filter ./packages/react dev",
+		"dev:node": "pnpm --filter ./packages/node dev",
+		"dev:next": "pnpm --filter ./packages/next dev",
+		"dev:toolkit": "pnpm --filter ./packages/toolkit dev",
+		"dev": "pnpm /^dev:.*/",
+		"lint:next": "pnpm --filter ./packages/next lint",
+		"lint:node": "pnpm --filter ./packages/node lint",
+		"lint:react": "pnpm --filter ./packages/react lint",
+		"lint:toolkit": "pnpm --filter ./packages/toolkit lint",
+		"lint": "pnpm m run lint",
+		"pre-commit": "pnpm lint",
+		"pre-push": "pnpm test && pnpm check-types",
+		"test:next": "pnpm --filter ./packages/next test",
+		"test:node": "pnpm --filter ./packages/node test",
+		"test:react": "pnpm --filter ./packages/react test",
+		"test:toolkit": "pnpm --filter ./packages/toolkit test",
+		"test:utils": "npx vitest packages/utils --run",
+		"test": "pnpm /^test:.*/",
+		"check-types:next": "cd packages/next && pnpm check-types",
+		"check-types:node": "cd packages/node && pnpm check-types",
+		"check-types:react": "cd packages/react && pnpm check-types",
+		"check-types:toolkit": "cd packages/toolkit && pnpm check-types",
+		"check-types": "pnpm m run check-types",
+		"changeset": "changeset",
+		"release": "changeset publish",
+		"version": "changeset version",
+		"ci:version": "pnpm version",
+		"ci:publish": "pnpm publish -r",
+		"manual:publish": "pnpm publish -r"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@changesets/cli": "2.27.3",
+		"@swc/core": "1.5.5",
+		"@types/node": "20.12.11",
+		"commitizen": "4.3.0",
+		"cross-env": "7.0.3",
+		"eslint": "9.2.0",
+		"husky": "9.0.11",
+		"lint-staged": "15.2.2",
+		"prettier": "3.2.5",
+		"semantic-release": "23.1.1",
+		"tsup": "8.0.2",
+		"typescript": "5.4.5",
+		"vitest": "1.6.0"
+	},
+	"workspaces": [
+		"apps/*",
+		"packages/*",
+		"internals/*",
+		"!**/test/**"
+	],
+	"engines": {
+		"node": ">=20",
+		"pnpm": ">=8"
+	},
+	"dependencies": {
+		"@changesets/changelog-github": "0.5.0"
+	},
+	"pnpm": {
+		"overrides": {
+			"qs@>=6.5.0 <6.5.3": ">=6.5.3",
+			"express@<4.19.2": ">=4.19.2"
+		}
+	}
 }

@@ -1,9 +1,9 @@
 {
-  "name": "next-demo",
+  "name": "next-14",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

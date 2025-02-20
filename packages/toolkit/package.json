@@ -1,0 +1,101 @@
+{
+	"name": "@userfront/toolkit",
+	"version": "1.0.10",
+	"description": "Bindings and components for authentication with Userfront with React, Vue, other frameworks, and plain JS + HTML",
+	"type": "module",
+	"directories": {
+		"test": "test"
+	},
+	"scripts": {
+		"dev-build": "node ./scripts/watch.cjs",
+		"dev-tsc": "tsc --watch --preserveWatchOutput --noEmit",
+		"dev": "npm-run-all --parallel dev-tsc dev-build",
+		"build": "tsc && node ./scripts/build.cjs && npm run build-types",
+		"build-types": "tsc src/**/*.{js,jsx} --declaration --allowJs --emitDeclarationOnly --outDir dist; cp types/index.d.ts dist/index.d.ts; cp types/index.d.ts dist/react.d.ts",
+		"test": "vitest run",
+		"watch": "vitest",
+		"coverage": "vitest run --coverage",
+		"storybook": "storybook dev -p 6006",
+		"build-storybook": "storybook build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/userfront/toolkit.git"
+	},
+	"keywords": ["userfront"],
+	"author": "Userfront",
+	"license": "MIT",
+	"main": "./dist/react.umd.cjs",
+	"module": "./dist/react.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/react.js",
+			"require": "./dist/react.umd.cjs"
+		},
+		"./react": {
+			"import": "./dist/react.js",
+			"require": "./dist/react.umd.cjs"
+		},
+		"./web-components": {
+			"import": "./dist/web-component.es.js",
+			"require": "./dist/web-component.umd.js"
+		},
+		"./vue": {
+			"import": "./dist/web-component.es.js",
+			"require": "./dist/web-component.umd.js"
+		},
+		"./themes/dynamic.css": "./dist/style.css"
+	},
+	"files": ["dist"],
+	"dependencies": {
+		"@r2wc/react-to-web-component": "^2.0.2",
+		"@react-hook/resize-observer": "^1.2.6",
+		"@userfront/core": "1.0.0",
+		"@xstate/react": "3.0.1",
+		"lodash": "^4.17.21",
+		"react-icons": "^4.4.0",
+		"react-phone-input-2": "^2.15.1",
+		"urlon": "^3.1.0",
+		"xstate": "4.33.6"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.19.3",
+		"@storybook/addon-actions": "^7.0.27",
+		"@storybook/addon-essentials": "^7.0.27",
+		"@storybook/addon-interactions": "^7.0.27",
+		"@storybook/addon-links": "^7.0.27",
+		"@storybook/react": "^7.0.27",
+		"@storybook/react-vite": "^7.0.27",
+		"@storybook/testing-library": "^0.2.0",
+		"@swc/core": "^1.10.18",
+		"@testing-library/jest-dom": "^5.16.5",
+		"@testing-library/react": "^14.0.0",
+		"@types/lodash": "4.17.15",
+		"@types/react": "^18.0.21",
+		"@types/react-dom": "^18.0.6",
+		"@vitejs/plugin-react": "^2.2.0",
+		"@vitest/coverage-c8": "^0.25.2",
+		"@xstate/graph": "2.0.0-alpha.0",
+		"@xstate/test": "1.0.0-alpha.0",
+		"babel-loader": "^8.2.5",
+		"esbuild": "^0.16.17",
+		"fast-check": "^3.3.0",
+		"jsdom": "^20.0.3",
+		"json": "^11.0.0",
+		"node-watch": "^0.7.4",
+		"npm-run-all": "^4.1.5",
+		"storybook": "^7.0.27",
+		"storybook-addon-pseudo-states": "2.1.0",
+		"typescript": "^4.8.4",
+		"unplugin-swc": "^1.5.1",
+		"vite": "^3.1.4",
+		"vite-plugin-css-injected-by-js": "^3.3.0",
+		"vite-plugin-dts": "^1.6.4",
+		"vitest": "^0.24.3"
+	},
+	"peerDependencies": {
+		"react": "18 || 19",
+		"react-dom": "18 || 19"
+	}
+}
