@@ -1,5 +1,5 @@
 {
-  "name": "@userfront/express",
+  "name": "userfront-express-app",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -8,11 +8,11 @@
   "dependencies": {
     "@userfront/node": "workspace:*",
     "dotenv-cli": "7.4.2",
-    "express": "4.16.1",
+    "express": "4.21.2",
     "tsx": "4.10.5"
   },
   "devDependencies": {
     "@types/express": "4.17.21",
-    "@userfront/tsconfig": "workspace:*"
+    "tsconfig": "workspace:*"
   }
 }

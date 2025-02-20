@@ -8,7 +8,10 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
-  contents: read #  to fetch code (actions/checkout)
+  contents: write #  to create release (changesets/action)
+  issues: write # to post issue comments (changesets/action)
+  pull-requests: write #  to create pull request (changesets/action)
+  id-token: write
 
 env:
   CI: true
@@ -19,12 +22,6 @@ jobs:
     timeout-minutes: 15
 
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write #  to create release (changesets/action)
-      issues: write # to post issue comments (changesets/action)
-      pull-requests: write #  to create pull request (changesets/action)
-      id-token: write
 
     steps:
       - name: Checkout code repository

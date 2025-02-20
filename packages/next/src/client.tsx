@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-
 import {
   type SignupFormProps,
   type LoginFormProps,

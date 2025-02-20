@@ -1,0 +1,1738 @@
+/*
+  Dynamic theme:
+    define
+      --userfront-light-color
+      --userfront-dark-color
+      --userfront-accent-color (optional)
+      --userfront-light-background-color (optional)
+      --userfront-dark-background-color (optional)
+
+  Supports color schemes:
+    Always light mode: .userfront-light-scheme
+    Always dark mode: .userfront-dark-scheme
+    Auto, per user preference: .userfront-auto-scheme
+
+  also optionally accepts parameters
+    --userfront-font-family
+    --userfront-em-size (general "size" of the toolkit form)
+    --userfront-spacing (how spaced elements are, relative to their size)
+*/
+
+/* Common styles between color schemes */
+.userfront-toolkit {
+  /* Outer container */
+
+  /* Width of outer container */
+  --userfront-container-width: auto;
+
+  /* Max width of outer container */
+  --userfront-container-max-width: 340px;
+
+  /* Height of outer container */
+  --userfront-container-height: auto;
+
+  /* Max height of outer container */
+  --userfront-container-max-height: unset;
+
+  /* Margin of outer container */
+  --userfront-container-margin: 0 auto;
+
+  /* Padding of outer container */
+  --userfront-container-padding: 2em 1.5em;
+
+  /* Box shadow applied to the outer container */
+  --userfront-container-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+  /* Box shadow of form, when hovered or active */
+  --userfront-container-active-box-shadow: var(
+    --userfront-container-box-shadow
+  );
+
+  /* Container border (color from color scheme) */
+  --userfront-container-border: 1px solid
+    var(--userfront-container-border-color);
+
+  /* Border radius of the outer container */
+  --userfront-container-border-radius: 4px;
+
+  /* Toolkit form globals */
+
+  /* Form-wide and targeted sizing */
+
+  /* Default font size; scales entire form, since sizes are set with em units */
+  --userfront-em-size: 14px;
+
+  /* Overall spacing: padding of form, distance between inputs */
+  --userfront-spacing: 1em;
+
+  /* Spacing between input and label */
+  --userfront-label-spacing: 0.5em;
+
+  /* Primary and secondary button height */
+  --userfront-button-height: 2em;
+
+  /* Primary and secondary button padding */
+  --userfront-button-padding: 0.5em;
+
+  /* Button icon size - icons are always square */
+  --userfront-button-icon-size: 2em;
+
+  /* Secured by Userfront font size */
+  --userfront-secured-font-size: 1em;
+
+  /* Height of the placeholder form, if no flow is available to be shown */
+  --userfront-placeholder-height: 300px;
+
+  /* General toolkit alignment */
+  --userfront-alignment: center;
+
+  /* Label alignment, relative to attached input */
+  --userfront-label-alignment: left;
+
+  /* Transform to apply on non-disabled button hover */
+  --userfront-button-hover-transform: none;
+
+  /* Rounding for edges of buttons and inputs */
+  --userfront-border-radius: 4px;
+
+  /* Font and font sizing */
+
+  /* Font to be applied to the whole form */
+  --userfront-font-family: Avenir, Helvetica, Arial, sans-serif;
+
+  /* Input font size */
+  --userfront-input-font-size: 1em;
+
+  /* Label size */
+  --userfront-label-font-size: 0.8em;
+
+  /* Title font size */
+  --userfront-title-font-size: 1.5em;
+
+  /* Form-level error message text size */
+  --userfront-error-font-size: 1em;
+
+  /* Primary and secondary button font size */
+  --userfront-button-font-size: 1em;
+
+  /* Subtle button font size */
+  --userfront-subtle-button-font-size: 1em;
+}
+
+/* Color schemes */
+
+/* Set default styles for the logout button since it appears outside a form */
+.userfront-toolkit {
+  /* Logout button background color */
+  --userfront-logout-color: #c72a2a;
+
+  /* Hovered and active version of the logout color */
+  /* TODO derived from --userfront-logout-color? */
+  --userfront-logout-color-active: #d84848;
+
+  /* Focused version of the logout color */
+  --userfront-logout-color-focus: var(--userfront-logout-color-active);
+
+  /* Disabled version of the logout color */
+  /* TODO: derived from logout-color? */
+  --userfront-logout-color-disabled: #ff8e8e;
+
+  /* Text color to use on logout color backdrop */
+  /* TODO: derived from logout-color? */
+  --userfront-logout-color-text: #ffffff;
+}
+
+/* Light mode (manual and auto) */
+.userfront-toolkit.userfront-light-scheme,
+.userfront-toolkit.userfront-auto-scheme {
+  /* dynamically defined variables */
+  --userfront-dyn-light-color: var(--userfront-light-color);
+  --userfront-dyn-dark-color: var(--userfront-dark-color);
+  --userfront-dyn-accent-color: var(
+    --userfront-accent-color,
+    color-mix(in hsl, #ffffff 50%, var(--userfront-dark-color))
+  );
+
+  /* default style variables (light) */
+
+  /* Outer container */
+
+  /* Border style of the outer container */
+  --userfront-container-border-color: #ebeef5;
+
+  /* Toolkit form globals */
+
+  /* Background color of the form */
+  --userfront-background-color: var(
+    --userfront-light-background-color,
+    #fdfdfd
+  );
+
+  /* Default text and divider color of the form */
+  --userfront-text-color: color-mix(
+    in hwb,
+    #000000 95%,
+    var(--userfront-primary-color)
+  );
+
+  /* Muted text color, used for dividers */
+  --userfront-divider-color: #ccc;
+
+  /* Primary color of the form, for primary button background and highlights */
+  --userfront-primary-color: var(--userfront-dyn-dark-color);
+
+  /* Hovered and active version of the primary color */
+  --userfront-primary-color-active: color-mix(
+    in hsl,
+    #000000 15%,
+    var(--userfront-primary-color)
+  );
+
+  /* Focused version of the primary color */
+  --userfront-primary-color-focus: color-mix(
+    in hsl,
+    #000000 25%,
+    var(--userfront-primary-color)
+  );
+
+  /* Disabled version of the primary color */
+  --userfront-primary-color-disabled: #color-mix(
+    in hsl,
+    #ffffff 25%,
+    var(--userfront-primary-color)
+  );
+
+  /* Text color to use on primary color backdrop */
+  --userfront-primary-color-text: color-mix(
+    in hwb,
+    #ffffff 95%,
+    var(--userfront-primary-color)
+  );
+
+  /* Secondary color, for secondary button background */
+  --userfront-secondary-color: var(--userfront-dyn-light-color);
+
+  /* TODO: think about primary and secondary colors again. These should naturally derive from the secondary. */
+  /* It's likely that the secondary color for the default theme (#ffffff) is wrong, and it should be the
+      light-background-color, and we just don't use the secondary color in our light mode theme. */
+  /* Hovered and active version of the secondary color */
+  --userfront-secondary-color-active: color-mix(
+    in hsl,
+    #ffffff 80%,
+    var(--userfront-primary-color)
+  );
+
+  /* Focus version of the secondary color */
+  --userfront-secondary-color-focus: color-mix(
+    in hsl,
+    #ffffff 80%,
+    var(--userfront-primary-color)
+  );
+
+  /* Disabled version of the secondary color */
+  /* TODO: not used? */
+  --userfront-secondary-color-disabled: #7a8291;
+
+  /* Text color to use on secondary color backdrop */
+  --userfront-secondary-color-text: color-mix(
+    in hwb,
+    #000000 80%,
+    var(--userfront-secondary-color)
+  );
+
+  /* Logout button background color */
+  --userfront-logout-color: #c72a2a;
+
+  /* Hovered and active version of the logout color */
+  /* TODO derived from --userfront-logout-color? */
+  --userfront-logout-color-active: #d84848;
+
+  /* Focused version of the logout color */
+  --userfront-logout-color-focus: var(--userfront-logout-color-active);
+
+  /* Disabled version of the logout color */
+  /* TODO: derived from logout-color? */
+  --userfront-logout-color-disabled: #ff8e8e;
+
+  /* Text color to use on logout color backdrop */
+  /* TODO: derived from logout-color? */
+  --userfront-logout-color-text: #ffffff;
+
+  /* Link color, for subtle buttons and links */
+  --userfront-link-color: color-mix(
+    in hwb,
+    #000000 50%,
+    var(--userfront-primary-color)
+  );
+
+  /* Error color, for text related to errors */
+  --userfront-error-color: #c71717;
+
+  /* Background color for error messages */
+  --userfront-error-background-color: #fae3e3;
+
+  /* Border color for error messages */
+  --userfront-error-border-color: #f7dcdc;
+
+  /* Color for informational update text */
+  --userfront-info-color: var(--userfront-secondary-color-text);
+
+  /* Background color for informational updates */
+  --userfront-info-background-color: #e6ffe5;
+
+  /* Border color for informational updates */
+  --userfront-info-border-color: #edf4ec;
+
+  /* Background color for text inputs */
+  /* TODO should this be derived? */
+  --userfront-input-background-color: #ffffff;
+
+  /* Active and hovered background color for text inputs */
+  /* TODO should this be derived from input-background-color? */
+  --userfront-input-background-color-active: #f8f9fa;
+
+  /* Text color for text inputs */
+  /* TODO should this be derived? */
+  --userfront-input-text-color: #606266;
+
+  /* Input placeholder text color */
+  /* TODO should this be derived? */
+  --userfront-placeholder-color: #999;
+
+  /* Active and hovered input placeholder text color */
+  --userfront-placeholder-color-active: #999;
+
+  /* Input border style */
+  --userfront-input-border-color: #dcdfe6;
+  --userfront-input-border: 1px solid var(--userfront-input-border-color);
+
+  /* Active and hovered input border style */
+  --userfront-input-border-active-color: #bcc1cf;
+  --userfront-input-border-active: 1px solid
+    var(--userfront-input-border-active-color);
+
+  /* Focused input border style */
+  --userfront-input-border-focus-color: var(--userfront-dyn-accent-color);
+  --userfront-input-border-focus: 2px solid
+    var(--userfront-input-border-focus-color);
+
+  /* Input border in error state */
+  --userfront-input-border-error: 1px solid var(--userfront-error-color);
+
+  /* Label text color */
+  --userfront-label-text-color: var(--userfront-text-color);
+
+  /* Label text color in error state */
+  --userfront-label-text-color-error: var(--userfront-error-color);
+
+  /* Title font color */
+  --userfront-title-text-color: var(--userfront-text-color);
+
+  /* Form-level error message color */
+  --userfront-error-text-color: var(--userfront-error-color);
+
+  /* Secured by Userfront font color */
+  --userfront-secured-font-color: #666;
+
+  /* Primary button border */
+  --userfront-primary-button-border-color: transparent;
+  --userfront-primary-button-border: none;
+
+  /* Hovered or active primary button border */
+  --userfront-primary-button-border-active-color: transparent;
+  --userfront-primary-button-border-active: none;
+
+  /* Focused primary button border */
+  --userfront-primary-button-border-focus-color: var(
+    --userfront-dyn-accent-color
+  );
+  --userfront-primary-button-border-focus: 3px solid
+    var(--userfront-primary-button-border-focus-color);
+
+  /* Box shadow for primary button when hovered, active, focused */
+  --userfront-primary-button-box-shadow-active: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+  /* Secondary button border */
+  --userfront-secondary-button-border-color: #cbceda;
+  --userfront-secondary-button-border: 1px solid
+    var(--userfront-secondary-button-border-color);
+
+  /* Hovered or active secondary button border */
+  --userfront-secondary-button-border-active-color: #bcc1cf;
+  --userfront-secondary-button-border-active: 1px solid
+    var(--userfront-secondary-button-border-active-color);
+
+  /* Focused secondary button border */
+  --userfront-secondary-button-border-focus-color: var(
+    --userfront-dyn-accent-color
+  );
+  --userfront-secondary-button-border-focus: 2px solid
+    var(--userfront-secondary-button-border-focus-color);
+
+  /* Box shadow for secondary button when hovered, active, focused */
+  --userfront-secondary-button-box-shadow-active: 0 2px 8px 0
+    rgba(0, 0, 0, 0.03);
+
+  /* Logout button border */
+  --userfront-logout-button-border: none;
+
+  /* Hovered or active logout button border */
+  --userfront-logout-button-border-active: none;
+
+  /* Focused logout button border */
+  --userfront-logout-button-border-focus-color: var(
+    --userfront-dyn-accent-color
+  );
+  --userfront-logout-button-border-focus: 3px solid
+    var(--userfront-logout-button-border-focus-color);
+
+  /* Box shadow for logout button when hovered, active, focused */
+  --userfront-logout-button-box-shadow-active: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+  /* Background color for test mode banner */
+  --userfront-test-mode-background-color: #ffda96;
+
+  /* Test color for test mode banner */
+  --userfront-test-mode-text-color: #303133;
+}
+
+/* Dark mode (auto) */
+@media (prefers-color-scheme: dark) {
+  .userfront-toolkit.userfront-auto-scheme {
+    /* dynamically defined variables */
+    --userfront-dyn-light-color: var(--userfront-light-color);
+    --userfront-dyn-dark-color: var(--userfront-dark-color);
+    --userfront-dyn-accent-color: var(
+      --userfront-accent-color,
+      color-mix(in hsl, #000000 50%, var(--userfront-light-color))
+    );
+
+    --userfront-dyn-dark-background-color: var(
+      --userfront-dark-background-color,
+      #2d2d2d
+    );
+    --userfront-dyn-secondary-color: color-mix(
+      in hwb,
+      #000000 90%,
+      var(--userfront-light-color)
+    );
+
+    /* default style variables (light) */
+
+    /* Outer container */
+
+    /* Border style of the outer container */
+    /* TODO dark mdoe */
+    --userfront-container-border-color: color-mix(
+      in hwb,
+      #ffffff 20%,
+      var(--userfront-dyn-dark-background-color)
+    );
+
+    /* Toolkit form globals */
+
+    /* Background color of the form */
+    --userfront-background-color: var(--userfront-dyn-dark-background-color);
+
+    /* Default text and divider color of the form */
+    --userfront-text-color: color-mix(
+      in hwb,
+      #ffffff 95%,
+      var(--userfront-primary-color)
+    );
+
+    /* Muted text color, used for dividers */
+    /* TODO dark theme: darker color */
+    --userfront-divider-color: color-mix(
+      in hwb,
+      #ffffff 20%,
+      var(--userfront-dyn-dark-background-color)
+    );
+
+    /* Primary color of the form, for primary button background and highlights */
+    --userfront-primary-color: var(--userfront-dyn-dark-color);
+
+    /* Hovered and active version of the primary color */
+    --userfront-primary-color-active: color-mix(
+      in hsl,
+      #ffffff 15%,
+      var(--userfront-primary-color)
+    );
+
+    /* Focused version of the primary color */
+    --userfront-primary-color-focus: color-mix(
+      in hsl,
+      #ffffff 20%,
+      var(--userfront-primary-color)
+    );
+
+    /* Disabled version of the primary color */
+    --userfront-primary-color-disabled: #color-mix(
+      in hsl,
+      #000000 25%,
+      var(--userfront-primary-color)
+    );
+
+    /* Text color to use on primary color backdrop */
+    /* TODO: darker than primary? */
+    /* --userfront-primary-color-text: color-mix(
+        in hwb,
+        #000000 75%,
+        var(--userfront-primary-color)
+      ); */
+    /* TODO: or lighter than primary? */
+    /* TODO: might need to be computed in JS - select the one
+          with the highest contrast */
+    --userfront-primary-color-text: color-mix(
+      in hwb,
+      #ffffff 90%,
+      var(--userfront-primary-color)
+    );
+
+    /* Secondary color, for secondary button background */
+    /* --userfront-secondary-color: var(--userfront-dyn-secondary-color); */
+    /* TODO same as background or different? */
+    /* --userfront-secondary-color: var(--userfront-dyn-dark-background-color); */
+    /* TODO or lighter? */
+    /* --userfront-secondary-color: color-mix(
+        in hwb,
+        #ffffff 3%,
+        var(--userfront-dyn-dark-background-color)
+      ); */
+    /* TODO: or based on accent color, so the colors match nicely? */
+    --userfront-secondary-color: color-mix(
+      in hwb,
+      var(--userfront-dyn-dark-background-color),
+      var(--userfront-light-color) 5%
+    );
+
+    /* TODO: think about primary and secondary colors again. These should naturally derive from the secondary. */
+    /* It's likely that the secondary color for the default theme (#ffffff) is wrong, and it should be the
+        light-background-color, and we just don't use the secondary color in our light mode theme. */
+    /* Hovered and active version of the secondary color */
+    --userfront-secondary-color-active: color-mix(
+      in hsl,
+      #ffffff 5%,
+      var(--userfront-secondary-color)
+    );
+
+    /* Focus version of the secondary color */
+    --userfront-secondary-color-focus: color-mix(
+      in hsl,
+      #ffffff 10%,
+      var(--userfront-secondary-color)
+    );
+
+    /* Disabled version of the secondary color */
+    /* TODO: not used? */
+    --userfront-secondary-color-disabled: #7a8291;
+
+    /* Text color to use on secondary color backdrop */
+    --userfront-secondary-color-text: color-mix(
+      in hwb,
+      #ffffff 80%,
+      var(--userfront-secondary-color)
+    );
+
+    /* Logout button background color */
+    /* TODO different for dark theme? */
+    --userfront-logout-color: #c72a2a;
+
+    /* Hovered and active version of the logout color */
+    /* TODO derived from --userfront-logout-color? */
+    --userfront-logout-color-active: #d84848;
+
+    /* Focused version of the logout color */
+    --userfront-logout-color-focus: var(--userfront-logout-color-active);
+
+    /* Disabled version of the logout color */
+    /* TODO: derived from logout-color? */
+    --userfront-logout-color-disabled: #ff8e8e;
+
+    /* Text color to use on logout color backdrop */
+    /* TODO: derived from logout-color? */
+    --userfront-logout-color-text: #ffffff;
+
+    /* Link color, for subtle buttons and links */
+    /* TODO: in light theme we derive this from userfront-primary,
+          but here we use userfront-accent. Should they be the same? */
+    --userfront-link-color: var(--userfront-accent-color);
+
+    /* Error color, for text related to errors */
+    /* TODO: should this derive from or mix in dark-background? */
+    --userfront-error-color: #ffc6c6;
+
+    /* Background color for error messages */
+    /* TODO: should this derive from or mix in dark-background? */
+    --userfront-error-background-color: #2b1e1e;
+
+    /* Border color for error messages */
+    --userfront-error-border-color: #951b1b;
+
+    /* Color for informational update text */
+    --userfront-info-color: var(--userfront-secondary-color-text);
+
+    /* Background color for informational updates */
+    --userfront-info-background-color: #123926;
+
+    /* Border color for informational updates */
+    --userfront-info-border-color: #25621d;
+
+    /* Background color for text inputs */
+    /* TODO should this be derived? */
+    --userfront-input-background-color: #1d1d1d;
+
+    /* Active and hovered background color for text inputs */
+    /* TODO should this be derived from input-background-color? */
+    --userfront-input-background-color-active: #252525;
+
+    /* Text color for text inputs */
+    --userfront-input-text-color: color-mix(
+      in hwb,
+      #ffffff 70%,
+      var(--userfront-primary-color)
+    );
+
+    /* Input placeholder text color */
+    --userfront-placeholder-color: color-mix(
+      in hwb,
+      #ffffff 60%,
+      var(--userfront-primary-color)
+    );
+
+    /* Active and hovered input placeholder text color */
+    /* TODO should this be derived? */
+    --userfront-placeholder-color-active: #999;
+
+    /* Input border style */
+    --userfront-input-border-color: color-mix(
+      in hwb,
+      #333333 70%,
+      var(--userfront-primary-color)
+    );
+    --userfront-input-border: 1px solid var(--userfront-input-border-color);
+
+    /* Active and hovered input border style */
+    --userfront-input-border-active-color: var(--userfront-dyn-accent-color);
+    --userfront-input-border-active: 1px solid
+      var(--userfront-input-border-active-color);
+
+    /* Focused input border style */
+    --userfront-input-border-focus-color: var(--userfront-dyn-accent-color);
+    --userfront-input-border-focus: 2px solid
+      var(--userfront-input-border-focus-color);
+
+    /* Input border in error state */
+    --userfront-input-border-error: 1px solid var(--userfront-error-color);
+
+    /* Label text color */
+    --userfront-label-text-color: var(--userfront-text-color);
+
+    /* Label text color in error state */
+    --userfront-label-text-color-error: var(--userfront-error-color);
+
+    /* Title font color */
+    --userfront-title-text-color: var(--userfront-text-color);
+
+    /* Secured by Userfront font color */
+    --userfront-secured-font-color: #ccc;
+
+    /* Primary button border */
+    --userfront-primary-button-border-color: transparent;
+    --userfront-primary-button-border: none;
+
+    /* Hovered or active primary button border */
+    --userfront-primary-button-border-active-color: transparent;
+    --userfront-primary-button-border-active: none;
+
+    /* Focused primary button border */
+    --userfront-primary-button-border-focus-color: var(
+      --userfront-dyn-accent-color
+    );
+    --userfront-primary-button-border-focus: 3px solid
+      var(--userfront-primary-button-border-focus-color);
+
+    /* Box shadow for primary button when hovered, active, focused */
+    --userfront-primary-button-box-shadow-active: 0 2px 12px 0
+      rgba(0, 0, 0, 0.1);
+
+    /* Secondary button border */
+    --userfront-secondary-button-border-color: color-mix(
+      in hwb,
+      #aaaaaa 40%,
+      var(--userfront-secondary-color)
+    );
+    --userfront-secondary-button-border: 2px solid
+      var(--userfront-secondary-button-border-color);
+
+    /* Hovered or active secondary button border */
+    --userfront-secondary-button-border-active-color: color-mix(
+      in hwb,
+      #eeeeee 30%,
+      var(--userfront-secondary-color)
+    );
+    --userfront-secondary-button-border-active: 2px solid
+      var(--userfront-secondary-button-border-active-color);
+
+    /* Focused secondary button border */
+    --userfront-secondary-button-border-focus-color: var(
+      --userfront-dyn-accent-color
+    );
+    --userfront-secondary-button-border-focus: 3px solid
+      var(--userfront-secondary-button-border-focus-color);
+
+    /* Box shadow for secondary button when hovered, active, focused */
+    --userfront-secondary-button-box-shadow-active: 0 2px 8px 0
+      rgba(0, 0, 0, 0.03);
+
+    /* Logout button border */
+    --userfront-logout-button-border: none;
+
+    /* Hovered or active logout button border */
+    --userfront-logout-button-border-active: none;
+
+    /* Focused logout button border */
+    --userfront-logout-button-border-focus-color: var(
+      --userfront-dyn-accent-color
+    );
+    --userfront-logout-button-border-focus: 3px solid
+      var(--userfront-logout-button-border-focus-color);
+
+    /* Box shadow for logout button when hovered, active, focused */
+    --userfront-logout-button-box-shadow-active: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+    /* Background color for test mode banner */
+    --userfront-test-mode-background-color: #ffda96;
+
+    /* Test color for test mode banner */
+    --userfront-test-mode-text-color: #303133;
+  }
+}
+
+/* Dark mode (manual) */
+/* TODO we can use CSS nesting to consolidate with the auto dark theme,
+      when CSS nesting has an acceptable support rate
+      https://caniuse.com/mdn-css_selectors_nesting
+  */
+.userfront-toolkit.userfront-dark-scheme {
+  /* dynamically defined variables */
+  --userfront-dyn-light-color: var(--userfront-light-color);
+  --userfront-dyn-dark-color: var(--userfront-dark-color);
+  --userfront-dyn-accent-color: var(
+    --userfront-accent-color,
+    color-mix(in hsl, #000000 50%, var(--userfront-light-color))
+  );
+
+  --userfront-dyn-dark-background-color: var(
+    --userfront-dark-background-color,
+    #2d2d2d
+  );
+  --userfront-dyn-secondary-color: color-mix(
+    in hwb,
+    #000000 90%,
+    var(--userfront-light-color)
+  );
+
+  /* default style variables (light) */
+
+  /* Outer container */
+
+  /* Border style of the outer container */
+  /* TODO dark mdoe */
+  --userfront-container-border-color: color-mix(
+    in hwb,
+    #ffffff 20%,
+    var(--userfront-dyn-dark-background-color)
+  );
+
+  /* Toolkit form globals */
+
+  /* Background color of the form */
+  --userfront-background-color: var(--userfront-dyn-dark-background-color);
+
+  /* Default text and divider color of the form */
+  --userfront-text-color: color-mix(
+    in hwb,
+    #ffffff 95%,
+    var(--userfront-primary-color)
+  );
+
+  /* Muted text color, used for dividers */
+  /* TODO dark theme: darker color */
+  --userfront-divider-color: color-mix(
+    in hwb,
+    #ffffff 20%,
+    var(--userfront-dyn-dark-background-color)
+  );
+
+  /* Primary color of the form, for primary button background and highlights */
+  --userfront-primary-color: var(--userfront-dyn-dark-color);
+
+  /* Hovered and active version of the primary color */
+  --userfront-primary-color-active: color-mix(
+    in hsl,
+    #ffffff 15%,
+    var(--userfront-primary-color)
+  );
+
+  /* Focused version of the primary color */
+  --userfront-primary-color-focus: color-mix(
+    in hsl,
+    #ffffff 20%,
+    var(--userfront-primary-color)
+  );
+
+  /* Disabled version of the primary color */
+  --userfront-primary-color-disabled: #color-mix(
+    in hsl,
+    #000000 25%,
+    var(--userfront-primary-color)
+  );
+
+  /* Text color to use on primary color backdrop */
+  /* TODO: darker than primary? */
+  /* --userfront-primary-color-text: color-mix(
+      in hwb,
+      #000000 75%,
+      var(--userfront-primary-color)
+    ); */
+  /* TODO: or lighter than primary? */
+  /* TODO: might need to be computed in JS - select the one
+        with the highest contrast */
+  --userfront-primary-color-text: color-mix(
+    in hwb,
+    #ffffff 90%,
+    var(--userfront-primary-color)
+  );
+
+  /* Secondary color, for secondary button background */
+  /* --userfront-secondary-color: var(--userfront-dyn-secondary-color); */
+  /* TODO same as background or different? */
+  /* --userfront-secondary-color: var(--userfront-dyn-dark-background-color); */
+  /* TODO or lighter? */
+  /* --userfront-secondary-color: color-mix(
+      in hwb,
+      #ffffff 3%,
+      var(--userfront-dyn-dark-background-color)
+    ); */
+  /* TODO: or based on accent color, so the colors match nicely? */
+  --userfront-secondary-color: color-mix(
+    in hwb,
+    var(--userfront-dyn-dark-background-color),
+    var(--userfront-light-color) 5%
+  );
+
+  /* TODO: think about primary and secondary colors again. These should naturally derive from the secondary. */
+  /* It's likely that the secondary color for the default theme (#ffffff) is wrong, and it should be the
+      light-background-color, and we just don't use the secondary color in our light mode theme. */
+  /* Hovered and active version of the secondary color */
+  --userfront-secondary-color-active: color-mix(
+    in hsl,
+    #ffffff 5%,
+    var(--userfront-secondary-color)
+  );
+
+  /* Focus version of the secondary color */
+  --userfront-secondary-color-focus: color-mix(
+    in hsl,
+    #ffffff 10%,
+    var(--userfront-secondary-color)
+  );
+
+  /* Disabled version of the secondary color */
+  /* TODO: not used? */
+  --userfront-secondary-color-disabled: #7a8291;
+
+  /* Text color to use on secondary color backdrop */
+  --userfront-secondary-color-text: color-mix(
+    in hwb,
+    #ffffff 80%,
+    var(--userfront-secondary-color)
+  );
+
+  /* Logout button background color */
+  /* TODO different for dark theme? */
+  --userfront-logout-color: #c72a2a;
+
+  /* Hovered and active version of the logout color */
+  /* TODO derived from --userfront-logout-color? */
+  --userfront-logout-color-active: #d84848;
+
+  /* Focused version of the logout color */
+  --userfront-logout-color-focus: var(--userfront-logout-color-active);
+
+  /* Disabled version of the logout color */
+  /* TODO: derived from logout-color? */
+  --userfront-logout-color-disabled: #ff8e8e;
+
+  /* Text color to use on logout color backdrop */
+  /* TODO: derived from logout-color? */
+  --userfront-logout-color-text: #ffffff;
+
+  /* Link color, for subtle buttons and links */
+  /* TODO: in light theme we derive this from userfront-primary,
+        but here we use userfront-accent. Should they be the same? */
+  --userfront-link-color: var(--userfront-accent-color);
+
+  /* Error color, for text related to errors */
+  /* TODO: should this derive from or mix in dark-background? */
+  --userfront-error-color: #ffc6c6;
+
+  /* Background color for error messages */
+  /* TODO: should this derive from or mix in dark-background? */
+  --userfront-error-background-color: #2b1e1e;
+
+  /* Border color for error messages */
+  --userfront-error-border-color: #951b1b;
+
+  /* Color for informational update text */
+  --userfront-info-color: var(--userfront-secondary-color-text);
+
+  /* Background color for informational updates */
+  --userfront-info-background-color: #123926;
+
+  /* Border color for informational updates */
+  --userfront-info-border-color: #25621d;
+
+  /* Background color for text inputs */
+  /* TODO should this be derived? */
+  --userfront-input-background-color: #1d1d1d;
+
+  /* Active and hovered background color for text inputs */
+  /* TODO should this be derived from input-background-color? */
+  --userfront-input-background-color-active: #252525;
+
+  /* Text color for text inputs */
+  --userfront-input-text-color: color-mix(
+    in hwb,
+    #ffffff 70%,
+    var(--userfront-primary-color)
+  );
+
+  /* Input placeholder text color */
+  --userfront-placeholder-color: color-mix(
+    in hwb,
+    #ffffff 60%,
+    var(--userfront-primary-color)
+  );
+
+  /* Active and hovered input placeholder text color */
+  /* TODO should this be derived? */
+  --userfront-placeholder-color-active: #999;
+
+  /* Input border style */
+  --userfront-input-border-color: color-mix(
+    in hwb,
+    #333333 70%,
+    var(--userfront-primary-color)
+  );
+  --userfront-input-border: 1px solid var(--userfront-input-border-color);
+
+  /* Active and hovered input border style */
+  --userfront-input-border-active-color: var(--userfront-dyn-accent-color);
+  --userfront-input-border-active: 1px solid
+    var(--userfront-input-border-active-color);
+
+  /* Focused input border style */
+  --userfront-input-border-focus-color: var(--userfront-dyn-accent-color);
+  --userfront-input-border-focus: 2px solid
+    var(--userfront-input-border-focus-color);
+
+  /* Input border in error state */
+  --userfront-input-border-error: 1px solid var(--userfront-error-color);
+
+  /* Label text color */
+  --userfront-label-text-color: var(--userfront-text-color);
+
+  /* Label text color in error state */
+  --userfront-label-text-color-error: var(--userfront-error-color);
+
+  /* Title font color */
+  --userfront-title-text-color: var(--userfront-text-color);
+
+  /* Secured by Userfront font color */
+  --userfront-secured-font-color: #ccc;
+
+  /* Primary button border */
+  --userfront-primary-button-border-color: transparent;
+  --userfront-primary-button-border: none;
+
+  /* Hovered or active primary button border */
+  --userfront-primary-button-border-active-color: transparent;
+  --userfront-primary-button-border-active: none;
+
+  /* Focused primary button border */
+  --userfront-primary-button-border-focus-color: var(
+    --userfront-dyn-accent-color
+  );
+  --userfront-primary-button-border-focus: 3px solid
+    var(--userfront-primary-button-border-focus-color);
+
+  /* Box shadow for primary button when hovered, active, focused */
+  --userfront-primary-button-box-shadow-active: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+  /* Secondary button border */
+  --userfront-secondary-button-border-color: color-mix(
+    in hwb,
+    #aaaaaa 40%,
+    var(--userfront-secondary-color)
+  );
+  --userfront-secondary-button-border: 2px solid
+    var(--userfront-secondary-button-border-color);
+
+  /* Hovered or active secondary button border */
+  --userfront-secondary-button-border-active-color: color-mix(
+    in hwb,
+    #eeeeee 30%,
+    var(--userfront-secondary-color)
+  );
+  --userfront-secondary-button-border-active: 2px solid
+    var(--userfront-secondary-button-border-active-color);
+
+  /* Focused secondary button border */
+  --userfront-secondary-button-border-focus-color: var(
+    --userfront-dyn-accent-color
+  );
+  --userfront-secondary-button-border-focus: 3px solid
+    var(--userfront-secondary-button-border-focus-color);
+
+  /* Box shadow for secondary button when hovered, active, focused */
+  --userfront-secondary-button-box-shadow-active: 0 2px 8px 0
+    rgba(0, 0, 0, 0.03);
+
+  /* Logout button border */
+  --userfront-logout-button-border: none;
+
+  /* Hovered or active logout button border */
+  --userfront-logout-button-border-active: none;
+
+  /* Focused logout button border */
+  --userfront-logout-button-border-focus-color: var(
+    --userfront-dyn-accent-color
+  );
+  --userfront-logout-button-border-focus: 3px solid
+    var(--userfront-logout-button-border-focus-color);
+
+  /* Box shadow for logout button when hovered, active, focused */
+  --userfront-logout-button-box-shadow-active: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+  /* Background color for test mode banner */
+  --userfront-test-mode-background-color: #ffda96;
+
+  /* Test color for test mode banner */
+  --userfront-test-mode-text-color: #303133;
+}
+
+/* More base styles */
+
+/* Styles for a free-standing toolkit element */
+.userfront-element {
+  color: var(--userfront-text-color);
+  font-family: var(--userfront-font-family);
+  text-align: var(--userfront-alignment);
+  font-size: var(--userfront-em-size);
+}
+
+/* Styles for the Storybook test background for components */
+.userfront-test-background {
+  margin: 0 auto;
+  width: 100%;
+  max-width: min-content;
+}
+
+/* Actual styles for container (separate from variable declarations for clarity and consistency) */
+.userfront-container {
+  color: var(--userfront-text-color);
+  background-color: var(--userfront-background-color);
+  border: var(--userfront-container-border);
+  border-radius: var(--userfront-border-radius);
+  box-shadow: var(--userfront-container-box-shadow);
+
+  padding: var(--userfront-container-padding);
+  margin: var(--userfront-container-margin);
+
+  width: var(--userfront-container-width);
+  max-width: var(--userfront-container-max-width);
+  min-width: 150px;
+  height: var(--userfront-container-height);
+  max-height: var(--userfront-container-max-height);
+
+  font-family: var(--userfront-font-family);
+  text-align: var(--userfront-alignment);
+  font-size: var(--userfront-em-size);
+}
+
+.userfront-container:hover,
+.userfront-container:active,
+.userfront-container:focus {
+  box-shadow: var(--userfront-container-active-box-shadow);
+}
+
+/* Apply font to everything */
+.userfront-toolkit * {
+  font-family: var(--userfront-font-family);
+}
+
+/* Lists */
+.userfront-toolkit ul {
+  padding-left: 0;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* Title text */
+.userfront-toolkit h2 {
+  font-size: var(--userfront-title-font-size);
+  color: var(--userfront-title-text-color);
+  margin-top: 0;
+}
+
+/* Form layout */
+.userfront-form {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  text-align: initial;
+}
+
+/* Form row: label + input group */
+.userfront-form .userfront-form-row {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-bottom: var(--userfront-spacing);
+}
+
+.userfront-form .userfront-form-row label {
+  display: block;
+  flex: 1 0 auto;
+  margin-left: 1px;
+}
+
+.userfront-form .userfront-form-row input {
+  display: block;
+  flex: 0 0 auto;
+  align-self: stretch;
+}
+
+.userfront-form .userfront-input-container {
+  flex: 0 0 auto;
+  align-self: stretch;
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+}
+
+/* Text inputs */
+.userfront-toolkit input.userfront-input {
+  color: var(--userfront-input-text-color);
+  background-color: var(--userfront-input-background-color);
+
+  border: var(--userfront-input-border);
+  border-radius: var(--userfront-border-radius);
+
+  font-size: var(--userfront-input-font-size);
+  line-height: calc(var(--userfront-input-font-size) * 2);
+
+  padding: 0.25em 1em;
+}
+
+.userfront-toolkit input.userfront-input:hover,
+.userfront-toolkit input.userfront-input:active {
+  background-color: var(--userfront-input-background-color-active);
+  border: var(--userfront-input-border-active);
+}
+
+.userfront-toolkit input.userfront-input:focus {
+  background-color: var(--userfront-input-background-color-active);
+  outline: var(--userfront-input-border-focus);
+}
+
+.userfront-toolkit input.userfront-input.userfront-has-error {
+  border: var(--userfront-input-border-error);
+}
+
+.userfront-toolkit input.userfront-input::placeholder {
+  color: var(--userfront-placeholder-color);
+}
+
+.userfront-toolkit input.userfront-input:hover::placeholder,
+.userfront-toolkit input.userfront-input:active::placeholder {
+  color: var(--userfront-placeholder-color-active);
+}
+
+/* Password reveal toggle */
+.userfront-toolkit .userfront-password-toggle {
+  position: absolute;
+  /* Position top of toggle container in line with top of input */
+  top: 1px;
+
+  /* Add some space to the right */
+  right: 8px;
+
+  /* Make toggle container the same size as the input */
+  height: 2.5em;
+
+  /* flex/center/center to center the icon within its container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  color: var(--userfront-placeholder-color);
+  width: 15px;
+}
+
+.userfront-toolkit input.userfront-input-error {
+  border-color: var(--userfront-error-color);
+}
+
+.userfront-toolkit .userfront-input-error-message {
+  color: var(--userfront-error-color);
+  padding: 0.25em 0;
+}
+
+.userfront-toolkit .userfront-input-error-placeholder {
+  height: calc(1.5em + 6px);
+}
+
+/* Labels for text inputs */
+.userfront-toolkit label {
+  width: auto;
+  text-align: var(--userfront-label-alignment);
+  line-height: calc(var(--userfront-input-font-size) * 2);
+  margin: 0 0.5em 0 0.5em;
+  /* Ensure a minimum font size for labels, for accessibility */
+  font-size: max(var(--userfront-label-font-size), 13px);
+}
+
+/* Secondary text - additional information for text inputs */
+.userfront-toolkit .userfront-secondary-text {
+  font-size: max(var(--userfront-label-font-size), 13px);
+  color: var(--userfront-secondary-color-text);
+  display: inline-block;
+  margin-top: 0.5em;
+}
+
+/* Primary and secondary buttons */
+.userfront-button {
+  padding: var(--userfront-button-padding);
+  font-size: var(--userfront-button-font-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: border, color, background-color, box-shadow 0.1s ease-out;
+}
+
+.userfront-tiny .userfront-button {
+  padding: calc(var(--userfront-button-padding) * 0.75);
+}
+
+/* Buttons are full width, top level items outside of a row */
+:not(.userfront-button-row) .userfront-button {
+  width: 100%;
+  margin-bottom: var(--userfront-spacing);
+}
+
+.userfront-button:not(.userfront-button-subtle):hover:not(:disabled),
+.userfront-button:not(.userfront-button-subtle):active:not(:disabled) {
+  transform: var(--userfront-button-hover-transform);
+}
+
+/* Icon buttons */
+.userfront-button .userfront-button-icon {
+  width: var(--userfront-button-icon-size) !important;
+  height: var(--userfront-button-icon-size) !important;
+  color: var(--userfront-text-color);
+}
+
+.userfront-button .userfront-icon-button-content {
+  flex: 0 0 auto;
+  /* Experimentally determined: the smallest min-width so that all icon buttons are neatly organized */
+  /* min-width: 12em; aligns buttons so that all icons are vertically aligned - which makes it look off center */
+  min-width: 7em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.userfront-button .userfront-icon-button-content .userfront-button-icon {
+  margin-right: var(--userfront-spacing);
+}
+
+/* Primary button */
+.userfront-toolkit .userfront-button-primary {
+  background-color: var(--userfront-primary-color);
+  color: var(--userfront-primary-color-text);
+  border: var(--userfront-primary-button-border);
+  border-radius: var(--userfront-border-radius);
+  cursor: pointer;
+  line-height: 2;
+  font-weight: 500;
+}
+
+.userfront-toolkit .userfront-button-primary:hover:not(:disabled),
+.userfront-toolkit .userfront-button-primary:active:not(:disabled) {
+  background-color: var(--userfront-primary-color-active);
+  border: var(--userfront-primary-button-border-active);
+  box-shadow: var(--userfront-primary-button-box-shadow-active);
+}
+
+.userfront-toolkit .userfront-button-primary:focus {
+  background-color: var(--userfront-primary-color-focus);
+  outline: var(--userfront-primary-button-border-focus);
+  box-shadow: var(--userfront-primary-button-box-shadow-active);
+}
+
+/* Logout button */
+.userfront-button.userfront-button-logout {
+  background-color: var(--userfront-logout-color);
+  color: var(--userfront-logout-color-text);
+  border: var(--userfront-logout-button-border);
+  border-radius: var(--userfront-border-radius);
+  cursor: pointer;
+  line-height: 2;
+  font-weight: 500;
+  max-width: 250px;
+}
+
+.userfront-button.userfront-button-logout:hover:not(:disabled),
+.userfront-button.userfront-button-logout:active:not(:disabled) {
+  background-color: var(--userfront-logout-color-active);
+  border: var(--userfront-logout-button-border-active);
+  box-shadow: var(--userfront-logout-button-box-shadow-active);
+}
+
+.userfront-button.userfront-button-logout:focus {
+  background-color: var(--userfront-logout-color-focus);
+  outline: var(--userfront-logout-button-border-focus);
+  box-shadow: var(--userfront-logout-button-box-shadow-active);
+}
+
+.userfront-button.userfront-button-logout:disabled {
+  background-color: var(--userfront-logout-color-disabled);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Secondary button */
+.userfront-toolkit .userfront-button-secondary {
+  background-color: var(--userfront-secondary-color);
+  color: var(--userfront-secondary-color-text);
+  border: var(--userfront-secondary-button-border);
+  border-radius: var(--userfront-border-radius);
+  cursor: pointer;
+}
+
+.userfront-toolkit .userfront-button-secondary:hover,
+.userfront-toolkit .userfront-button-secondary:active {
+  background-color: var(--userfront-secondary-color-active);
+  border: var(--userfront-secondary-button-border-active);
+  box-shadow: var(--userfront-secondary-button-box-shadow-active);
+}
+
+.userfront-toolkit .userfront-button-secondary:focus {
+  background-color: var(--userfront-secondary-color-focus);
+  outline: var(--userfront-secondary-button-border-focus);
+  box-shadow: var(--userfront-secondary-button-box-shadow-active);
+}
+
+/* Subtle button */
+.userfront-toolkit .userfront-button-subtle {
+  font-size: var(--userfront-subtle-button-font-size);
+  color: var(--userfront-link-color);
+  text-decoration: underline;
+  cursor: pointer;
+  border: none;
+  background-color: inherit;
+}
+
+.userfront-toolkit .userfront-button-subtle:focus {
+  font-weight: bold;
+}
+
+/* Button row - multiple buttons on one row */
+.userfront-toolkit .userfront-button-row {
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: var(--userfront-spacing);
+  margin-bottom: var(--userfront-spacing);
+  justify-content: stretch;
+}
+
+.userfront-toolkit .userfront-button-row:last-child {
+  margin-bottom: 0;
+}
+
+.userfront-toolkit .userfront-button-row > .userfront-button {
+  flex: 1 1;
+}
+
+/* Secured by Userfront */
+.userfront-toolkit .userfront-secured,
+.userfront-toolkit .userfront-secured:visited {
+  color: var(--userfront-secured-font-color);
+  font-size: var(--userfront-secured-font-size);
+  margin-right: var(--userfront-spacing);
+  text-decoration: none;
+}
+
+.userfront-toolkit .userfront-secured:hover {
+  text-decoration: underline;
+}
+
+.userfront-toolkit .userfront-secured .userfront-secured-icon {
+  /* Hard-coded to 18px to preserve sharpness of the image. */
+  width: 18px;
+  height: 18px;
+  margin-right: 0.3em;
+  vertical-align: top;
+
+  /* Adjust the image to the correct shade of gray */
+  filter: contrast(20%);
+
+  transform: 0.2s ease-in-out;
+}
+
+.userfront-toolkit .userfront-secured:hover .userfront-secured-icon {
+  text-decoration: underline;
+  filter: brightness(0) saturate(100%) invert(45%) sepia(10%) saturate(5443%)
+    hue-rotate(201deg) brightness(96%) contrast(86%);
+}
+
+/* Dividers */
+
+.userfront-divider {
+  height: 1px;
+  border-bottom: 1px solid var(--userfront-divider-color);
+  margin-bottom: var(--userfront-spacing);
+}
+
+.userfront-divider-split {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: stretch;
+  margin-bottom: var(--userfront-spacing);
+  color: var(--userfront-secondary-color-text);
+}
+
+.userfront-divider-split .userfront-divider {
+  flex: 1 1 auto;
+  /* Experimentally determined 3px adjustment to center with text */
+  height: calc(var(--userfront-em-size) / 2);
+  margin-bottom: 0;
+}
+
+.userfront-divider-split .userfront-divider-text {
+  flex: 0 0 auto;
+  margin: 0 1em 0 1em;
+  line-height: 1em;
+}
+
+/* Error message */
+
+.userfront-error {
+  border-radius: var(--userfront-border-radius);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.userfront-error.userfront-has-error {
+  background-color: var(--userfront-error-background-color);
+  padding: calc(var(--userfront-spacing) / 2);
+  border: 1px solid var(--userfront-error-border-color);
+  margin-bottom: var(--userfront-spacing);
+}
+
+.userfront-error .userfront-error-text {
+  color: var(--userfront-error-color);
+  display: block;
+  flex: 0 1 auto;
+}
+
+/* Info message */
+.userfront-info-message {
+  margin-top: var(--userfront-spacing);
+  margin-bottom: var(--userfront-spacing);
+  border-radius: var(--userfront-border-radius);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.userfront-info-message.userfront-has-info-message {
+  background-color: var(--userfront-info-background-color);
+  padding: calc(var(--userfront-spacing) / 2);
+  border: 1px solid var(--userfront-info-border-color);
+}
+
+.userfront-info-message .userfront-info-message-text {
+  color: var(--userfront-info-color);
+  display: block;
+  flex: 0 1 auto;
+}
+
+/* Test mode notice */
+.userfront-test-mode-notice {
+  background-color: var(--userfront-test-mode-background-color);
+  color: var(--userfront-test-mode-text-color);
+  padding: 0.25rem 2rem 0.25rem 2rem;
+  margin: 0 auto;
+  margin-top: 0.5rem;
+  width: max-content;
+  border-radius: var(--userfront-border-radius);
+  font-size: 0.8em;
+}
+
+/* Placeholder for when we're loading form */
+.userfront-toolkit .userfront-placeholder {
+  height: var(--userfront-placeholder-height);
+}
+
+/* Phone number input */
+/* Mostly controlled by the library, but we need to set a max-width
+  outside of a layer so it's more specific */
+.userfront-toolkit .react-tel-input .form-control {
+  max-width: var(--userfront-container-width);
+}
+
+/* Theme customizations */
+
+/** Rounded element theming **/
+/* Makes things more rounded generally **/
+.userfront-toolkit.userfront-rounded .userfront-button,
+.userfront-toolkit.userfront-rounded.userfront-button {
+  border-radius: 12px;
+}
+
+.userfront-toolkit.userfront-rounded .userfront-input {
+  border-radius: 8px;
+}
+
+/** Squared element theming **/
+/* Makes things more squared generally */
+.userfront-toolkit.userfront-squared .userfront-button,
+.userfront-toolkit.userfront-squared.userfront-button {
+  border-radius: 0px;
+}
+
+.userfront-toolkit.userfront-squared .userfront-input {
+  border-radius: 0px;
+}
+
+/** Hide "Secured by Userfront" **/
+.userfront-toolkit.userfront-hide-branding .userfront-secured {
+  display: none;
+}
+
+/** Interactive gradients on buttons **/
+.userfront-toolkit.userfront-gradient-buttons
+  .userfront-button.userfront-button-primary {
+  background-image: linear-gradient(
+    90deg,
+    var(--userfront-primary-color) 0,
+    color-mix(in hsl, var(--userfront-primary-color), #bbbbbb 20%) 51%,
+    var(--userfront-primary-color)
+  );
+  background-size: 200% auto;
+  transition: background-position 0.33s ease-out;
+}
+
+.userfront-toolkit.userfront-gradient-buttons.userfront-button-logout {
+  background-image: linear-gradient(
+    90deg,
+    var(--userfront-logout-color) 0,
+    var(--userfront-logout-color-active) 51%,
+    var(--userfront-logout-color)
+  );
+  background-size: 200% auto;
+  transition: background-position 0.33s ease-out;
+}
+
+.userfront-toolkit.userfront-gradient-buttons
+  .userfront-button.userfront-button-primary:hover:not(:disabled),
+.userfront-toolkit.userfront-gradient-buttons
+  .userfront-button.userfront-button-primary:focus:not(:disabled),
+.userfront-toolkit.userfront-gradient-buttons.userfront-button-logout:hover:not(
+    :disabled
+  ),
+.userfront-toolkit.userfront-gradient-buttons.userfront-button-logout:focus:not(
+    :disabled
+  ) {
+  background-position: 50%;
+}
+
+.userfront-toolkit.userfront-gradient-buttons
+  .userfront-button.userfront-button-secondary {
+  background-image: linear-gradient(
+    90deg,
+    var(--userfront-secondary-color) 0,
+    color-mix(in hsl, var(--userfront-secondary-color), #888888 20%) 51%,
+    var(--userfront-secondary-color)
+  );
+  background-size: 200% auto;
+  transition: background-position 0.33s ease-out;
+}
+
+.userfront-toolkit.userfront-gradient-buttons
+  .userfront-button.userfront-button-secondary:hover:not(:disabled),
+.userfront-toolkit.userfront-gradient-buttons
+  .userfront-button.userfront-button-secondary:focus:not(:disabled) {
+  background-position: 50%;
+}
+
+/* fix a bad animation */
+.userfront-toolkit.userfront-gradient-buttons.userfront-raised-buttons
+  .userfront-button.userfront-button-primary,
+.userfront-toolkit.userfront-gradient-buttons.userfront-raised-button.userfront-button,
+.userfront-toolkit.userfront-gradient-buttons.userfront-raised-buttons
+  .userfront-button.userfront-button-secondary {
+  background-position: unset;
+}
+
+/* Raised buttons */
+/* Primary */
+.userfront-toolkit.userfront-raised-buttons
+  .userfront-button.userfront-button-primary {
+  border: 1px solid var(--userfront-primary-color);
+  background: linear-gradient(
+    to bottom,
+    color-mix(in hwb, #ffffff 10%, var(--userfront-primary-color)) 1%,
+    color-mix(in hwb, #000000 10%, var(--userfront-primary-color)) 100%
+  );
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  outline-offset: 2px;
+}
+
+.userfront-toolkit.userfront-raised-buttons
+  .userfront-button.userfront-button-primary:hover:not(:disabled),
+.userfront-toolkit.userfront-raised-buttons
+  .userfront-button.userfront-button-primary:focus:not(:disabled) {
+  background: var(--userfront-primary-color);
+}
+
+.userfront-toolkit.userfront-raised-buttons
+  .userfront-button.userfront-button-primary:active:not(:disabled) {
+  background: linear-gradient(
+    to top,
+    color-mix(in hwb, #ffffff 10%, var(--userfront-primary-color)) 1%,
+    color-mix(in hwb, #000000 10%, var(--userfront-primary-color)) 100%
+  );
+}
+
+/* Secondary */
+.userfront-toolkit.userfront-raised-buttons
+  .userfront-button.userfront-button-secondary {
+  border: 1px solid var(--userfront-secondary-button-border-color);
+  background: linear-gradient(
+    to bottom,
+    color-mix(in hwb, #ffffff 10%, var(--userfront-secondary-color)) 1%,
+    color-mix(in hwb, #000000 10%, var(--userfront-secondary-color)) 100%
+  );
+  /* text-shadow: 1px 1px 0 rgba(0,0,0,0.25); */
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  outline-offset: 2px;
+}
+
+.userfront-toolkit.userfront-raised-buttons
+  .userfront-button.userfront-button-secondary:hover:not(:disabled),
+.userfront-toolkit.userfront-raised-buttons
+  .userfront-button.userfront-button-secondary:focus:not(:disabled) {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in hwb, #ffffff 15%, var(--userfront-secondary-color)) 1%,
+    color-mix(in hwb, #000000 5%, var(--userfront-secondary-color)) 100%
+  );
+}
+
+.userfront-toolkit.userfront-raised-buttons
+  .userfront-button.userfront-button-secondary:active:not(:disabled) {
+  background: linear-gradient(
+    to top,
+    color-mix(in hwb, #ffffff 10%, var(--userfront-secondary-color)) 1%,
+    color-mix(in hwb, #000000 10%, var(--userfront-secondary-color)) 100%
+  );
+}
+
+/* Logout */
+.userfront-toolkit.userfront-raised-buttons.userfront-button-logout {
+  border: 1px solid var(--userfront-logout-color);
+  background: linear-gradient(
+    to bottom,
+    color-mix(in hwb, #ffffff 10%, var(--userfront-logout-color)) 1%,
+    color-mix(in hwb, #000000 10%, var(--userfront-logout-color)) 100%
+  );
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  outline-offset: 2px;
+}
+
+.userfront-toolkit.userfront-raised-buttons.userfront-button-logout:hover:not(
+    :disabled
+  ),
+.userfront-toolkit.userfront-raised-buttons.userfront-button-logout:focus:not(
+    :disabled
+  ) {
+  background: var(--userfront-logout-color);
+}
+
+.userfront-toolkit.userfront-raised-buttons.userfront-button-logout:active:not(
+    :disabled
+  ) {
+  background: linear-gradient(
+    to top,
+    color-mix(in hwb, #ffffff 10%, var(--userfront-logout-color)) 1%,
+    color-mix(in hwb, #000000 10%, var(--userfront-logout-color)) 100%
+  );
+}
+
+/* Inset appearance for inputs */
+.userfront-toolkit.userfront-raised-buttons .userfront-input {
+  outline-offset: 2px;
+  border-width: 1px;
+  border-color: var(--userfront-secondary-button-border-color);
+  border-style: outset;
+}
+
+.userfront-toolkit.userfront-raised-buttons
+  .userfront-input:hover:not(:disabled),
+.userfront-toolkit.userfront-raised-buttons
+  .userfront-input:active:not(:disabled) {
+  border-width: 2px;
+  border-style: outset;
+  margin-top: -2px;
+}
+
+.userfront-toolkit.userfront-raised-buttons
+  .userfront-input:focus:not(:disabled) {
+  border-width: 2px;
+  margin-top: -2px;
+  border-style: inset;
+  outline-style: hidden;
+}
+
+/* Dotted outlines */
+.userfront-toolkit.userfront-dotted-outlines
+  .userfront-button:active:not(:disabled),
+.userfront-toolkit.userfront-dotted-outlines
+  .userfront-button:focus:not(:disabled),
+.userfront-toolkit.userfront-dotted-outlines
+  .userfront-input:focus:not(:disabled),
+.userfront-toolkit.userfront-dotted-outlines.userfront-button:active:not(
+    :disabled
+  ),
+.userfront-toolkit.userfront-dotted-outlines.userfront-button:focus:not(
+    :disabled
+  ) {
+  outline-offset: 1px;
+  outline-width: 2px;
+  outline-style: dotted;
+}

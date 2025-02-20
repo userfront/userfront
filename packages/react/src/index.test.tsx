@@ -1,11 +1,9 @@
-import * as React from "react";
-import { describe, expect, it, test } from "vitest";
+import { describe, expect, it } from "vitest";
 import { render, renderHook, screen } from "@testing-library/react";
 import { UserfrontProvider, useUserfront } from "./index";
+import type { ComponentProps } from "react";
 
-const renderProvider = (
-  options: React.ComponentProps<typeof UserfrontProvider>,
-) => {
+const renderProvider = (options: ComponentProps<typeof UserfrontProvider>) => {
   let result: ReturnType<typeof useUserfront> | undefined;
 
   const TestComp = () => {

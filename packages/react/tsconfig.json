@@ -1,5 +1,5 @@
 {
-  "extends": "@userfront/tsconfig/react.json",
+  "extends": "tsconfig/react.json",
   "include": ["tsup.config.ts", "src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "dist"]
 }

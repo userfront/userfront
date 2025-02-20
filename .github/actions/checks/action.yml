@@ -17,7 +17,7 @@ runs:
       shell: bash
 
     - name: Checks for known security issues with the installed packages
-      run: pnpm audit --audit-level=critical
+      run: pnpm audit --audit-level=high
       shell: bash
 
     - name: Unit tests

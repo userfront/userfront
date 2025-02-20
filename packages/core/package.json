@@ -1,0 +1,53 @@
+{
+  "name": "@userfront/core",
+  "version": "1.1.0",
+  "description": "Userfront core JS library",
+  "source": "src/index.js",
+  "main": "build/userfront-core.js",
+  "module": "build/userfront-core.module.js",
+  "unpkg": "build/userfront-core.umd.js",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "coverage": "vitest run --coverage",
+    "build": "rollup --config && npm run ts:copy",
+    "pub": "npm publish",
+    "pub:beta": "npm publish --tag beta",
+    "reinstall": "rm -rf node_modules && rm package-lock.json && npm install",
+    "ts:copy": "cp ts/index.d.ts build/userfront-core.d.ts; cp ts/index.d.ts build/userfront-core.modern.d.ts; cp ts/index.d.ts build/userfront-core.module.d.ts; cp ts/index.d.ts build/userfront-core.umd.d.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/userfront/userfront-core.git"
+  },
+  "keywords": [
+    "userfront",
+    "auth",
+    "authentication",
+    "authorization",
+    "access",
+    "control",
+    "multi-tenancy"
+  ],
+  "author": "Userfront",
+  "bugs": {
+    "url": "https://github.com/userfront/userfront-core/issues"
+  },
+  "homepage": "https://github.com/userfront/userfront-core#readme",
+  "dependencies": {
+    "axios": "1.8.3",
+    "js-cookie": "2.2.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "25.0.7",
+    "@rollup/plugin-node-resolve": "15.2.3",
+    "@rollup/plugin-terser": "0.4.4",
+    "@vitest/coverage-v8": "1.4.0",
+    "fast-check": "3.16.0",
+    "jsdom": "^24.0.0",
+    "jsonwebtoken": "9.0.2",
+    "rollup": "4.35.0",
+    "typescript": "5.4.3",
+    "vitest": "3.0.8"
+  }
+}
