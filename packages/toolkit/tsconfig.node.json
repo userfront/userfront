@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "types": [
+      "vitest/importMeta",
+      "vitest/globals"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@": ["src"],
+      "@test": ["test"]
+    }
+  },
+  "include": ["vite.config.js"]
+}

@@ -17,9 +17,7 @@
     "client",
     "server"
   ],
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "exports": {
     "./client": {
       "types": "./dist/client.d.ts",
@@ -53,14 +51,14 @@
     "@userfront/node": "workspace:*",
     "@userfront/react": "workspace:*",
     "eslint": "9.2.0",
-    "tsup": "8.0.2",
+    "tsup": "8.4.0",
     "type-fest": "4.18.2",
-    "typescript": "5.4.5",
-    "vitest": "1.6.0"
+    "typescript": "5.8.2",
+    "vitest": "3.0.8"
   },
   "peerDependencies": {
-    "next": "^14",
-    "react": "^18",
-    "react-dom": "^18"
+    "next": "^14.2.15 || 15",
+    "react": "18 || 19",
+    "react-dom": "18 || 19"
   }
 }

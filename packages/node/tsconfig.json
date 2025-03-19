@@ -1,5 +1,5 @@
 {
-  "extends": "@userfront/tsconfig/node.json",
+  "extends": "tsconfig/node.json",
   "compilerOptions": {
     "resolveJsonModule": true,
   },

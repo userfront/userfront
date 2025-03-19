@@ -1,7 +1,7 @@
 /**
  * React wrappers for Userfront toolkit components
  */
-import * as React from "react";
+import { type ComponentProps, forwardRef, type ElementRef } from "react";
 import {
   LoginForm as LoginFormPrimitive,
   LogoutButton as LogoutButtonPrimitive,
@@ -12,17 +12,13 @@ import { useUserfront } from "./index";
 
 const isServer = typeof window === "undefined";
 
-interface ToolkitProps {
-  compact?: boolean;
-}
-
 /**
  * Signup Form
  */
-type SignupFormProps = ToolkitProps;
+type SignupFormProps = ComponentProps<typeof SignupFormPrimitive>;
 
-const SignupForm = React.forwardRef<
-  React.ElementRef<typeof SignupFormPrimitive>,
+const SignupForm = forwardRef<
+  ElementRef<typeof SignupFormPrimitive>,
   SignupFormProps
 >((props, ref) => {
   const {
@@ -44,10 +40,10 @@ const SignupForm = React.forwardRef<
 
   return (
     <SignupFormPrimitive
-      ref={ref}
+      // ref={ref}
       {...props}
       tenantId={tenantId}
-      redirect={signupRedirect}
+      // redirect={signupRedirect}
       {...(requireAuth && { redirectOnLoadIfLoggedIn: loginRedirect })}
     />
   );
@@ -58,10 +54,10 @@ SignupForm.displayName = "UserfrontSignupForm";
 /**
  * Login Form
  */
-type LoginFormProps = ToolkitProps;
+type LoginFormProps = ComponentProps<typeof LoginFormPrimitive>;
 
-const LoginForm = React.forwardRef<
-  React.ElementRef<typeof LoginFormPrimitive>,
+const LoginForm = forwardRef<
+  ElementRef<typeof LoginFormPrimitive>,
   LoginFormProps
 >((props, ref) => {
   const { tenantId, isLoading, skeleton, loginRedirect, requireAuth } =
@@ -77,10 +73,10 @@ const LoginForm = React.forwardRef<
 
   return (
     <LoginFormPrimitive
-      ref={ref}
+      // ref={ref}
       {...props}
       tenantId={tenantId}
-      redirect={loginRedirect}
+      // redirect={loginRedirect}
       {...(requireAuth && { redirectOnLoadIfLoggedIn: loginRedirect })}
     />
   );
@@ -91,10 +87,10 @@ LoginForm.displayName = "UserfrontLoginForm";
 /**
  * Password Reset Form
  */
-type PasswordResetFormProps = ToolkitProps;
+type PasswordResetFormProps = ComponentProps<typeof PasswordResetFormPrimitive>;
 
-const PasswordResetForm = React.forwardRef<
-  React.ElementRef<typeof PasswordResetFormPrimitive>,
+const PasswordResetForm = forwardRef<
+  ElementRef<typeof PasswordResetFormPrimitive>,
   PasswordResetFormProps
 >((props, ref) => {
   const { tenantId, isLoading, skeleton, loginRedirect, requireAuth } =
@@ -110,10 +106,10 @@ const PasswordResetForm = React.forwardRef<
 
   return (
     <PasswordResetFormPrimitive
-      ref={ref}
+      // ref={ref}
       {...props}
       tenantId={tenantId}
-      redirect={loginRedirect}
+      // redirect={loginRedirect}
       {...(requireAuth && { redirectOnLoadIfLoggedIn: loginRedirect })}
     />
   );
@@ -124,10 +120,10 @@ PasswordResetForm.displayName = "UserfrontPasswordResetForm";
 /**
  * Password Reset Form
  */
-type LogoutButtonProps = ToolkitProps;
+type LogoutButtonProps = ComponentProps<typeof LogoutButtonPrimitive>;
 
-const LogoutButton = React.forwardRef<
-  React.ElementRef<typeof LogoutButtonPrimitive>,
+const LogoutButton = forwardRef<
+  ElementRef<typeof LogoutButtonPrimitive>,
   LogoutButtonProps
 >((props, ref) => {
   const { tenantId, isLoading, skeleton, logoutRedirect } = useUserfront();
@@ -142,10 +138,10 @@ const LogoutButton = React.forwardRef<
 
   return (
     <LogoutButtonPrimitive
-      ref={ref}
+      // ref={ref}
       {...props}
-      tenantId={tenantId}
-      redirect={logoutRedirect}
+      // tenantId={tenantId}
+      // redirect={logoutRedirect}
     />
   );
 });
@@ -161,5 +157,4 @@ export {
   type PasswordResetFormProps,
   LogoutButton,
   type LogoutButtonProps,
-  type ToolkitProps,
 };

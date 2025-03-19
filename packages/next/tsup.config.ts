@@ -1,5 +1,5 @@
-import type {Options} from "tsup";
-import { isProduction } from '../utils'
+import type { Options } from "tsup";
+import { isProduction } from "../utils";
 
 export default {
   dts: true,
@@ -11,4 +11,4 @@ export default {
   splitting: false,
   sourcemap: process.env.NODE_ENV === "development" ? "inline" : false,
   noExternal: ["@userfront/node", "@userfront/react"],
-} as Options;
+} satisfies Options;

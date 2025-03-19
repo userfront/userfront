@@ -7,26 +7,36 @@
     "build:next": "pnpm --filter ./packages/next build",
     "build:node": "pnpm --filter ./packages/node build",
     "build:react": "pnpm --filter ./packages/react build",
-    "build": "pnpm run build:node && pnpm run build:react && pnpm run build:next",
+    "build:toolkit": "pnpm --filter ./packages/toolkit build",
+    "build:core": "pnpm --filter ./packages/core build",
+    "build": "pnpm m run build",
     "clean": "pnpm store prune && rm -rf node_modules",
     "dev:react": "pnpm --filter ./packages/react dev",
     "dev:node": "pnpm --filter ./packages/node dev",
     "dev:next": "pnpm --filter ./packages/next dev",
+    "dev:toolkit": "pnpm --filter ./packages/toolkit dev",
+    "dev:core": "pnpm --filter ./packages/core dev",
     "dev": "pnpm /^dev:.*/",
     "lint:next": "pnpm --filter ./packages/next lint",
     "lint:node": "pnpm --filter ./packages/node lint",
     "lint:react": "pnpm --filter ./packages/react lint",
+    "lint:toolkit": "pnpm --filter ./packages/toolkit lint",
+    "lint:core": "pnpm --filter ./packages/core lint",
     "lint": "pnpm m run lint",
     "pre-commit": "pnpm lint",
     "pre-push": "pnpm test && pnpm check-types",
     "test:next": "pnpm --filter ./packages/next test",
     "test:node": "pnpm --filter ./packages/node test",
     "test:react": "pnpm --filter ./packages/react test",
+    "test:toolkit": "pnpm --filter ./packages/toolkit test",
+    "test:core": "pnpm --filter ./packages/core test",
     "test:utils": "npx vitest packages/utils --run",
     "test": "pnpm /^test:.*/",
     "check-types:next": "cd packages/next && pnpm check-types",
     "check-types:node": "cd packages/node && pnpm check-types",
     "check-types:react": "cd packages/react && pnpm check-types",
+    "check-types:toolkit": "cd packages/toolkit && pnpm check-types",
+    "check-types:core": "cd packages/core && pnpm check-types",
     "check-types": "pnpm m run check-types",
     "changeset": "changeset",
     "release": "changeset publish",
@@ -36,8 +46,9 @@
     "manual:publish": "pnpm publish -r"
   },
   "devDependencies": {
-    "@changesets/cli": "2.27.3",
-    "@swc/core": "1.5.5",
+    "@biomejs/biome": "1.9.4",
+    "@changesets/cli": "2.28.1",
+    "@swc/core": "1.11.10",
     "@types/node": "20.12.11",
     "commitizen": "4.3.0",
     "cross-env": "7.0.3",
@@ -46,16 +57,11 @@
     "lint-staged": "15.2.2",
     "prettier": "3.2.5",
     "semantic-release": "23.1.1",
-    "tsup": "8.0.2",
-    "typescript": "5.4.5",
-    "vitest": "1.6.0"
+    "tsup": "8.4.0",
+    "typescript": "5.8.2",
+    "vitest": "3.0.8"
   },
-  "workspaces": [
-    "apps/*",
-    "packages/*",
-    "internals/*",
-    "!**/test/**"
-  ],
+  "workspaces": ["apps/*", "packages/*", "internals/*", "!**/test/**"],
   "engines": {
     "node": ">=20",
     "pnpm": ">=8"
@@ -65,8 +71,7 @@
   },
   "pnpm": {
     "overrides": {
-      "qs@>=6.5.0 <6.5.3": ">=6.5.3",
-      "express@<4.19.2": ">=4.19.2"
+      "nth-check": "2.1.1"
     }
   }
 }

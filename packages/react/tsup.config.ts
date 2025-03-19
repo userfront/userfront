@@ -1,5 +1,5 @@
 import { defineConfig } from "tsup";
-import { isProduction } from '../utils'
+import { isProduction } from "../utils";
 
 export default defineConfig({
   clean: true,

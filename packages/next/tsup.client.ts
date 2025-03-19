@@ -1,5 +1,5 @@
 import { defineConfig } from "tsup";
-import defaults from "./tsup.config"
+import defaults from "./tsup.config";
 
 export default defineConfig({
   ...defaults,
@@ -8,10 +8,10 @@ export default defineConfig({
   format: [
     // ESM is not working due to bundled CJS dependencies
     // "esm",
-    "cjs"
+    "cjs",
   ],
   banner: {
-    js: `"use client";`
+    js: `"use client";`,
   },
   platform: "browser",
 });
