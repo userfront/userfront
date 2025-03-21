@@ -1,0 +1,19 @@
+name: Test
+
+on:
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - run: pnpm audit --audit-level=high
+      - run: pnpm run lint
+      - run: pnpm run check-types
+      - run: pnpm run build

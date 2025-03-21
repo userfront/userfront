@@ -5,39 +5,27 @@ on:
     branches:
       - main
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
-
-permissions:
-  contents: write #  to create release (changesets/action)
-  issues: write # to post issue comments (changesets/action)
-  pull-requests: write #  to create pull request (changesets/action)
-  id-token: write
-
-env:
-  CI: true
-
 jobs:
   release:
-    name: Release
-    timeout-minutes: 15
-
+    if: ${{ github.repository_owner == 'userfront' }}
+    name: Create a PR for release workflow
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code repository
+      - name: Checkout Repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
       - uses: ./.github/actions/setup
-
-      - uses: ./.github/actions/checks
-
-      - name: Create and publish versions
-        uses: changesets/action@v1
+      - run: pnpm run build
+      - name: Create Version PR or Publish to NPM
+        id: changesets
+        uses: changesets/action@v1.4.1
         with:
-          version: pnpm ci:version
-          publish: pnpm ci:publish
+          commit: "chore(release): version packages"
+          title: "chore(release): version packages"
+          version: npx changeset version
+          publish: npx changeset publish
         env:
-          GITHUB_TOKEN: ${{ secrets.CHANGESET_GH_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_ENV: "production"
