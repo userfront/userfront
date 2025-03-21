@@ -1,7 +1,7 @@
 {
-  "name": "@userfront/userfront",
-  "version": "1.0.0",
-  "description": "TypeScript monorepo for Userfront NPM packages",
+  "name": "userfront",
+  "version": "0.0.0",
+  "description": "Monorepo for the Userfront JavaScript/TypeScript SDKs",
   "private": true,
   "scripts": {
     "build:next": "pnpm --filter ./packages/next build",

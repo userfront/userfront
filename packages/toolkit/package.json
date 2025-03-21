@@ -1,6 +1,6 @@
 {
   "name": "@userfront/toolkit",
-  "version": "1.0.10",
+  "version": "1.0.11-canary.1",
   "description": "Bindings and components for authentication with Userfront with React, Vue, other frameworks, and plain JS + HTML",
   "type": "module",
   "directories": {
