@@ -13,6 +13,7 @@ import { useMachine } from "@xstate/react";
  * @param {object} props
  * @param {string=} props.type - the form type: "signup", "login", "reset"
  * @param {string=} props.tenantId - the tenant ID to use
+ * @param {string=} props.baseUrl - the baseUrl to use
  * @param {object=} props.flow - auth flow to use. By default this is fetched from the server.
  * @param {boolean=} props.compact - if true, for the password method, show a "Username and password" button.
  *   If false, show the password entry form alongside the buttons to choose a different factor.
@@ -53,6 +54,7 @@ import { useMachine } from "@xstate/react";
 function PackagedUniversalForm({
   type,
   tenantId,
+  baseUrl,
   flow,
   compact,
   theme,
@@ -75,6 +77,7 @@ function PackagedUniversalForm({
       if (type) {
         config.type = type;
       }
+      config.baseUrl = baseUrl;
       config.compact = !!compact;
       config.shouldFetchFlow = !!shouldFetchFlow;
       config.redirect = redirect;
