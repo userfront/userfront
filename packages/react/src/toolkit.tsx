@@ -23,6 +23,7 @@ const SignupForm = forwardRef<
 >((props, ref) => {
   const {
     tenantId,
+    baseUrl,
     isLoading,
     skeleton,
     signupRedirect,
@@ -45,6 +46,7 @@ const SignupForm = forwardRef<
       tenantId={tenantId}
       // redirect={signupRedirect}
       {...(requireAuth && { redirectOnLoadIfLoggedIn: loginRedirect })}
+      {...(baseUrl && { baseUrl: baseUrl })}
     />
   );
 });
@@ -60,7 +62,7 @@ const LoginForm = forwardRef<
   ElementRef<typeof LoginFormPrimitive>,
   LoginFormProps
 >((props, ref) => {
-  const { tenantId, isLoading, skeleton, loginRedirect, requireAuth } =
+  const { tenantId, isLoading, skeleton, loginRedirect, requireAuth, baseUrl } =
     useUserfront();
 
   if (isServer) {
@@ -78,6 +80,7 @@ const LoginForm = forwardRef<
       tenantId={tenantId}
       // redirect={loginRedirect}
       {...(requireAuth && { redirectOnLoadIfLoggedIn: loginRedirect })}
+      {...(baseUrl && { baseUrl: baseUrl })}
     />
   );
 });
@@ -93,7 +96,7 @@ const PasswordResetForm = forwardRef<
   ElementRef<typeof PasswordResetFormPrimitive>,
   PasswordResetFormProps
 >((props, ref) => {
-  const { tenantId, isLoading, skeleton, loginRedirect, requireAuth } =
+  const { tenantId, isLoading, skeleton, loginRedirect, requireAuth, baseUrl } =
     useUserfront();
 
   if (isServer) {
@@ -111,6 +114,7 @@ const PasswordResetForm = forwardRef<
       tenantId={tenantId}
       // redirect={loginRedirect}
       {...(requireAuth && { redirectOnLoadIfLoggedIn: loginRedirect })}
+      {...(baseUrl && { baseUrl: baseUrl })}
     />
   );
 });
@@ -140,8 +144,8 @@ const LogoutButton = forwardRef<
     <LogoutButtonPrimitive
       // ref={ref}
       {...props}
-      // tenantId={tenantId}
-      // redirect={logoutRedirect}
+    // tenantId={tenantId}
+    // redirect={logoutRedirect}
     />
   );
 });

@@ -249,6 +249,7 @@ export const defaultAuthContext = {
   config: {
     flow: null,
     tenantId: null,
+    baseUrl: null,
     shouldFetchFlow: true,
     mode: "live",
     compact: false,
@@ -331,7 +332,7 @@ const universalMachineConfig: AuthMachineConfig = {
             method: "init",
             args: [
               context.config.tenantId!,
-              { options: { userfrontSource: "toolkit" } },
+              { options: { userfrontSource: "toolkit", baseUrl: context.config.baseUrl } },
             ],
           });
           return context.config.tenantId;
