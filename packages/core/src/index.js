@@ -41,7 +41,7 @@ function init(tenantId, opts = {}) {
 
   store.tenantId = tenantId;
 
-  store.baseUrl = opts.baseUrl || apiUrl;
+  store.baseUrl = opts.baseUrl || opts.options?.baseUrl || apiUrl;
   if (!store.baseUrl.endsWith("/")) {
     store.baseUrl += "/";
   }
@@ -76,7 +76,7 @@ function init(tenantId, opts = {}) {
       });
     }
     initCallbacks = [];
-  } catch (error) {}
+  } catch (error) { }
 }
 
 /**
@@ -117,7 +117,7 @@ function registerUrlChangedEventListener() {
     window.addEventListener("popstate", () => {
       window.dispatchEvent(new Event("urlchanged"));
     });
-  } catch (error) {}
+  } catch (error) { }
 }
 
 /**
@@ -143,7 +143,7 @@ export default {
       console.warn(
         "Userfront.refresh() is deprecated and will be removed. Please use Userfront.tokens.refresh() instead."
       );
-    } catch (error) {}
+    } catch (error) { }
     return refresh(a, b, c);
   },
 

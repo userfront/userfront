@@ -34,6 +34,7 @@ export type FactorAction = "setup" | "use";
 export interface FormConfig {
   type: FormType;
   tenantId?: string;
+  baseUrl?: string;
   flow?: Flow;
   mode?: string;
   // Is this in compact mode i.e. hide password behind a button
@@ -60,7 +61,7 @@ export interface UserData {
 // TYPES FOR FACTORS
 
 // Data common to forms for all factors
-export interface CommonFormData {}
+export interface CommonFormData { }
 
 export interface EmailLink extends CommonFormData {
   type: "emailLink";

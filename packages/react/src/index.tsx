@@ -121,6 +121,7 @@ export function UserfrontProvider({
   const value = useMemo(() => {
     return {
       tenantId,
+      baseUrl,
       isAuthenticated,
       isLoading,
       skeleton,
@@ -142,6 +143,7 @@ export function UserfrontProvider({
     skeleton,
     tenantId,
     userfront,
+    baseUrl
   ]);
 
   return (
