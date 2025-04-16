@@ -393,13 +393,13 @@ export const setFirstFactorAction = assign((context: AuthContext<View>) => ({
 
 export const setSecondFactorAction = assign((context: AuthContext<View>) => {
   const hasExistingSecondFactors = context.allowedSecondFactors?.some(
-    (factor) => factor.isConfiguredByUser
+    (factor) => factor.isPreferredByUser
   );
   if (hasExistingSecondFactors) {
     return {
       action: <FactorAction>"use",
       allowedSecondFactors: context.allowedSecondFactors?.filter(
-        (factor) => factor.isConfiguredByUser
+        (factor) => factor.isPreferredByUser
       ),
     };
   } else {
