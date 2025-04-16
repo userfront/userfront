@@ -57,13 +57,6 @@ export async function signupWithPassword({
         params: getPkceRequestQueryParams(),
       }
     );
-    // If the user has MFA configured, set isConfiguredByUser to false
-    if (data.authentication && data.authentication.secondFactors) {
-      data.authentication.secondFactors = data.authentication.secondFactors.map(factor => ({
-        ...factor,
-        isConfiguredByUser: false
-      }));
-    }
     // Handle the API response to the login request
     return handleLoginResponse({
       data,
