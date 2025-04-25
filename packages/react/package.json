@@ -1,6 +1,6 @@
 {
   "name": "@userfront/react",
-  "version": "2.0.2-canary.1",
+  "version": "2.0.3",
   "description": "Transform your React application with Userfront authentication",
   "repository": {
     "type": "git",
