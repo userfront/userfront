@@ -113,7 +113,8 @@ export const factorToLogoAndText = (factor) => {
                 size="32px"
               />
             ),
-            text: "Email me a code",
+            text: "Email already configured",
+            disabled: true,
           };
         case "sms":
           return {
@@ -147,9 +148,9 @@ const IconButton = ({ factor, children, ...props }) => {
   if (!factor) {
     return <BasicButton {...props}>{children}</BasicButton>;
   }
-  const { logo, text } = factorToLogoAndText(factor);
+  const { logo, text , disabled } = factorToLogoAndText(factor);
   return (
-    <button {...props} className="userfront-button userfront-button-secondary">
+    <button {...props} disabled={props?.disabled || disabled} className="userfront-button userfront-button-secondary">
       <span className="userfront-icon-button-content">
         {logo}
         <span className="userfront-icon-button-text">{`${text}`}</span>
