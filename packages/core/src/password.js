@@ -57,7 +57,6 @@ export async function signupWithPassword({
         params: getPkceRequestQueryParams(),
       }
     );
-
     // Handle the API response to the login request
     return handleLoginResponse({
       data,

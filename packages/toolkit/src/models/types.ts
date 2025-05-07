@@ -6,6 +6,7 @@ export type Factor = {
   channel: string;
   strategy: string;
   isConfiguredByUser?: boolean;
+  isPreferredByUser?: boolean;
 };
 
 // An auth flow, per the Userfront API
