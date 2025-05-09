@@ -7,9 +7,21 @@ import { hasValue } from "../config/utils";
 // Virtually identical to the "email me a code" machine above - see that one for more details
 const smsCodeConfig: AuthMachineConfig = {
   id: "smsCode",
-  initial: "showForm",
+  initial: "decide",
   entry: ["clearError", "setupView"],
   states: {
+    // NEW branching state for initial logic
+    decide: {
+      always: [
+        {
+          target: "send",
+          cond: (context) => context.config.type === "login",
+        },
+        {
+          target: "showForm",
+        },
+      ],
+    },
     // Show the form to enter a phone number
     showForm: {
       on: {
@@ -34,8 +46,10 @@ const smsCodeConfig: AuthMachineConfig = {
           // Set method, phoneNumber, and possibly name and username as arguments for the call
           const arg: Record<string, string> = {
             channel: "sms",
-            phoneNumber: (<SmsCodeContext>context).view.phoneNumber,
           };
+          if (hasValue((<SmsCodeContext>context).view.phoneNumber)) {
+            arg.phoneNumber = (<SmsCodeContext>context).view.phoneNumber;
+          }
           if (hasValue(context.user.name)) {
             arg.name = context.user.name;
           }
@@ -90,7 +104,6 @@ const smsCodeConfig: AuthMachineConfig = {
               {
                 method: "verificationCode",
                 channel: "sms",
-                phoneNumber: (<SmsCodeContext>context).view.phoneNumber,
                 verificationCode: (<SmsCodeContext>context).view
                   .verificationCode,
                 redirect: context.config.redirect,
