@@ -10,7 +10,7 @@ const smsCodeConfig: AuthMachineConfig = {
   initial: "decide",
   entry: ["clearError", "setupView"],
   states: {
-    // NEW branching state for initial logic
+    // Determine whether to send code immediately (login) or show phone entry form (e.g., signup)
     decide: {
       always: [
         {
