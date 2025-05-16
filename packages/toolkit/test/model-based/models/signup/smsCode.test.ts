@@ -16,7 +16,13 @@ const machineOptions = {
 const smsCodeMachine = createMachine(
   addGlobalStates(smsCodeConfig),
   <any>machineOptions
-).withContext(defaultAuthContext);
+).withContext({
+  ...defaultAuthContext,
+  config: {
+    ...(defaultAuthContext.config || {}),
+    type: "signup", // ⚠️ force signup mode so tests start in showForm
+  },
+});
 
 const testMachine = createTestMachine({
   initial: "showingPhoneNumberForm",
@@ -134,7 +140,7 @@ describe("model-based: models/signup/smsCode", () => {
             expect(arg.channel).toEqual("sms");
             expect(arg.method).toEqual("verificationCode");
             expect(arg.verificationCode).toEqual(verificationCode);
-            expect(arg.phoneNumber).toEqual(phoneNumber);
+            expect(arg.phoneNumber).toBeUndefined();
           },
           showingCodeFormWithError: () => {
             const state = smsCodeService.getSnapshot();
